@@ -17,6 +17,9 @@
         <input v-model="input_value" placeholder="Search..." />
       </form>
     </div>
+    <div class="loading-container" v-if="is_loading">
+      <img alt="Loading..." :src="require('../assets/Wedges-3s-251px.png')" />
+    </div>
   </div>
 </template>
 
@@ -31,20 +34,26 @@ export default {
     const store = useStore();
     const is_dark_theme = computed(() => store.state.is_dark_theme);
     const input_value = ref("");
+    const is_loading = ref(false);
 
     function handle_toggle_theme() {
       store.commit("toggle_theme");
     }
 
     async function handle_submit() {
-      const res = await get_fetch(input_value.value, "SEARCH");
-      input_value.value = "";
-      console.log(res);
+      is_loading.value = true;
+      const params = {
+        page_number: 1,
+      };
+      const res = await get_fetch(input_value.value, "SEARCH", params);
+      is_loading.value = false;
+      console.log(res.data.Page);
     }
 
     return {
       is_dark_theme,
       input_value,
+      is_loading,
       handle_toggle_theme,
       handle_submit,
     };
@@ -64,6 +73,15 @@ export default {
 </script>
 
 <style>
+.loading-container {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-container img {
+  width: 10%;
+}
+
 .header {
   width: 100%;
   height: 5rem;
