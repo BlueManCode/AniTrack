@@ -1,41 +1,55 @@
 <template>
-  <!-- Home -->
-  <div v-if="input_value === ''">
-    <div class="header">
-      <form @submit.prevent>
-        <input v-model="input_value" placeholder="Search..." />
-        <button class="theme-change" @click="handle_toggle_theme">
-          {{ is_dark_theme ? "Dark" : "Light" }}
-        </button>
-      </form>
+  <div class="container">
+    <!-- Home -->
+    <div v-if="input_value === ''">
+      <div class="header">
+        <form @submit.prevent>
+          <input v-model="input_value" placeholder="Search..." />
+          <button class="theme-change" @click="handle_toggle_theme">
+            {{ is_dark_theme ? "Dark" : "Light" }}
+          </button>
+        </form>
+      </div>
     </div>
-  </div>
-  <!-- Model -->
-  <div v-else>
-    <div class="header">
-      <form @submit.prevent="handle_submit">
-        <input v-model="input_value" placeholder="Search..." />
-      </form>
-    </div>
-    <div class="loading-container" v-if="is_loading">
-      <img alt="Loading..." :src="require('../assets/Wedges-3s-251px.png')" />
+
+    <!-- Model -->
+    <div v-else>
+      <div class="header">
+        <form @submit.prevent="handle_submit">
+          <input v-model="input_value" placeholder="Search..." />
+        </form>
+      </div>
+
+      <!-- CardView -->
+      <div class="cardview-container">
+        <Card v-for="res in search_results.media" :key="res.id" :res="res" />
+      </div>
+
+      <!-- Loading -->
+      <div class="loading-container" v-if="is_loading">
+        <img alt="Loading..." :src="require('../assets/Wedges-3s-251px.png')" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { watch, computed, ref } from "vue";
 import { useStore } from "vuex";
-
 import { get_fetch } from "../lib/get_fetch";
+
+import Card from "../components/cardview";
 
 export default {
   setup() {
+    // variables
     const store = useStore();
     const is_dark_theme = computed(() => store.state.is_dark_theme);
     const input_value = ref("");
     const is_loading = ref(false);
+    const search_results = ref([]);
 
+    // functions
     function handle_toggle_theme() {
       store.commit("toggle_theme");
     }
@@ -47,15 +61,26 @@ export default {
       };
       const res = await get_fetch(input_value.value, "SEARCH", params);
       is_loading.value = false;
-      console.log(res.data.Page);
+      search_results.value = res.data.Page;
     }
 
+    // set watchers
+    watch(input_value, (newValue, oldValue) => {
+      if (newValue === "") {
+        search_results.value = [];
+        console.log("cleared");
+      }
+    });
+
+    // return everything
     return {
       is_dark_theme,
       input_value,
       is_loading,
+      search_results,
       handle_toggle_theme,
       handle_submit,
+      Card,
     };
   },
   created() {
@@ -73,13 +98,23 @@ export default {
 </script>
 
 <style>
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.cardview-container {
+  width: 100%;
+  height: 100%;
+}
+
 .loading-container {
   display: flex;
   justify-content: center;
 }
 
 .loading-container img {
-  width: 10%;
+  width: 7%;
 }
 
 .header {
