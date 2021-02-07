@@ -1,0 +1,38 @@
+:root {
+  /* dark mode */
+  
+  /* light mode */
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#app[theme="light"] {
+  --background-primary: #FFFFFF;
+  --background-secondary: #E5E5E5;
+  --text-light: #181818;
+  --contrast: #181818;
+  
+  width: 100%;
+  height: 100%;
+  background: var(--background-primary);
+  color: var(--text-light);
+}
+
+/* dark theme */
+#app[theme="dark"] {
+  --background-secondary: #202020;
+  --background-primary: #181818;
+  --text-dark: #E5E5E5;
+  --contrast: #E5E5E5;
+
+
+  width: 100%;
+  height: 100%;
+  background: var(--background-primary);
+  color: var(--text-dark);
+}
