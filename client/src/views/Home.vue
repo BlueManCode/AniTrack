@@ -98,9 +98,17 @@ export default {
 </script>
 
 <style>
+body {
+  overflow-x: hidden;
+  box-sizing: content-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .container {
-  width: 100vw;
-  height: 100vh;
+  background: var(--background-primary);
 }
 
 .cardview-container {
