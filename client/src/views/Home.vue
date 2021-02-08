@@ -22,7 +22,9 @@
 
       <!-- CardView -->
       <div class="cardview-container">
-        <Card v-for="res in search_results.media" :key="res.id" :res="res" />
+        <div class="card-container">
+          <Card v-for="res in search_results.media" :key="res.id" :res="res" />
+        </div>
       </div>
 
       <!-- Loading -->
@@ -98,22 +100,39 @@ export default {
 </script>
 
 <style>
+/* half screen */
+@media only screen and (max-width: 900px) {
+  .card-container {
+    width: 95%;
+  }
+}
+
+/* full screen */
+@media only screen and (min-width: 900px) {
+  .card-container {
+    width: 70%;
+  }
+}
+
 body {
   overflow-x: hidden;
   box-sizing: content-box;
 }
 
-::-webkit-scrollbar {
-  display: none;
+.card-container {
+  height: 100%;
+  padding-top: 90px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.cardview-container {
+  display: flex;
+  justify-content: center;
 }
 
 .container {
   background: var(--background-primary);
-}
-
-.cardview-container {
-  width: 100%;
-  height: 100%;
 }
 
 .loading-container {
@@ -129,6 +148,7 @@ body {
   width: 100%;
   height: 5rem;
   background: var(--background-secondary);
+  position: fixed;
 }
 
 form {

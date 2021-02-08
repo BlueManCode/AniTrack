@@ -1,7 +1,7 @@
 module.exports = {
   build_search_string(search_term, params) {
    return `query {
-      Page(page: ${params.page_number}, perPage: 10){
+      Page(page: ${params.page_number}, perPage: 20){
           pageInfo {
             total
             perPage

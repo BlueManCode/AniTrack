@@ -8,9 +8,13 @@ html, body {
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 #app[theme="light"] {
-  --background-primary: #FFFFFF;
-  --background-secondary: #E5E5E5;
+  --background-primary: #EDF1F5;
+  --background-secondary: #FFFFFF;
   --text-light: #181818;
   --contrast: #181818;
   
