@@ -3,18 +3,13 @@
     <HeaderSmall />
     <div class="home-container">
       <div class="container-content">
-        <InteractionSearch />
+        <div v-if="is_show_profile">
+          <InteractionProfile />
+        </div>
+        <div v-else>
+          <InteractionSearch />
+        </div>
         <div class="card-container">
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
-          <MyShowCard />
           <MyShowCard />
         </div>
       </div>
@@ -23,17 +18,27 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import { useStore } from "vuex";
 
 import HeaderSmall from ".././components/HeaderSmall";
 import InteractionSearch from ".././components/InteractionSearch";
+import InteractionProfile from "../components/InteractionProfile";
 import MyShowCard from ".././components/MyShowCard";
 
 export default {
-  components: { HeaderSmall, InteractionSearch, MyShowCard },
+  components: {
+    HeaderSmall,
+    InteractionSearch,
+    MyShowCard,
+    InteractionProfile,
+  },
   setup() {
-    const data = reactive({});
-    return {};
+    const store = useStore();
+
+    return {
+      is_show_profile: computed(() => store.state.is_show_profile),
+    };
   },
 };
 </script>

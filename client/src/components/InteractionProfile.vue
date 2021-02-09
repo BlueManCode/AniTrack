@@ -1,38 +1,29 @@
 <template>
   <div class="interaction-search-container">
     <form>
-      <label>Search</label>
-      <input v-model="data.search_term" class="input-bar" />
+      <label>Profile Option</label>
+      <select class="input-bar">
+        <option></option>
+        <option>option 1</option>
+        <option>option 1</option>
+      </select>
     </form>
-    <button @click="handle_interaction_toggle">Profile</button>
+    <button @click="handle_interaction_toggle">Search</button>
   </div>
 </template>
 
 <script>
-import { reactive, watch, watchEffect } from "vue";
 import { useStore } from "vuex";
 
 export default {
-  name: "InteractionSearch",
+  name: "InteractionProfile",
   setup() {
-    const data = reactive({
-      search_term: "",
-    });
     const store = useStore();
     function handle_interaction_toggle() {
       store.commit("toggle_profile");
     }
 
-    watch(data, (newVal, oldVal) => {
-      if (newVal.search_term) {
-        console.log(newVal.search_term);
-      }
-    });
-
-    // watchEffect(() => console.log(data.search_term));
-
     return {
-      data,
       handle_interaction_toggle,
     };
   },
@@ -61,16 +52,18 @@ label {
   opacity: 70%;
 }
 
-input {
+select {
   width: 100%;
-  height: 5vmin;
+  height: 5.2vmin;
   background: var(--background-secondary);
   border-style: none;
   color: var(--text-color);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   font-family: "Overpass", sans-serif;
-  font-weight: bold;
+  font-weight: bolder;
+  padding-left: 10px;
+  opacity: 80%;
   font-size: medium;
 }
 
