@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .interaction-search-container {
   width: 100%;
   display: flex;
@@ -50,11 +50,13 @@ label {
   font-size: larger;
   font-weight: bolder;
   opacity: 70%;
+  margin-top: 2vmin;
 }
 
 select {
   width: 100%;
-  height: 5.2vmin;
+  height: 7vmin;
+  padding-left: 2vmin;
   background: var(--background-secondary);
   border-style: none;
   color: var(--text-color);
@@ -69,7 +71,7 @@ select {
 
 button {
   width: 25%;
-  height: 5.5vmin;
+  height: 7vmin;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   border-style: none;

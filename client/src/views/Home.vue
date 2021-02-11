@@ -9,9 +9,9 @@
         <div v-else>
           <InteractionSearch />
         </div>
-        <div class="card-container">
+        <!-- <div class="card-container">
           <MyShowCard />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

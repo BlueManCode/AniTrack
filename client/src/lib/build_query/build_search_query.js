@@ -1,5 +1,4 @@
-export default {
- build_search_query(params) {
+export default function build_search_query(params) {
    return `query {
     Page(page: 1, perPage: 10){
         pageInfo {
@@ -9,7 +8,7 @@ export default {
           lastPage
           hasNextPage
         }
-       media (search: "my hero academia", type: ANIME) {
+       media (search: "${params.search_term}", type: ANIME) {
         id
         idMal
         title {
@@ -76,4 +75,3 @@ export default {
   
   `
  } 
-}

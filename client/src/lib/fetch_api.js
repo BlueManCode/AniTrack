@@ -1,3 +1,4 @@
+import build_search_query from './build_query/build_search_query'
 
 async function fetch_function(query) {
   const url = "https://graphql.anilist.co"
@@ -16,9 +17,8 @@ async function fetch_function(query) {
   return json
 }
 
-export default {
-  fetch_api(type, params = []) {
-    const query = ''
+export default function fetch_api(type, params = []) {
+    let query = ''
     switch(type) {
       case 'SEARCH': query = build_search_query(params)
       break
@@ -26,4 +26,3 @@ export default {
     } 
     return fetch_function(query);
   }
-}
