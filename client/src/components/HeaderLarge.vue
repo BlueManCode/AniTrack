@@ -68,7 +68,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
 .header-large-container {
   width: 100%;
   height: 25vmin;
@@ -77,6 +77,9 @@ export default {
   justify-content: center;
   align-items: flex-start;
   padding-top: 2vmin;
+  position: absolute;
+  top: 0;
+  z-index: 0;
 }
 
 .menu-option-container {

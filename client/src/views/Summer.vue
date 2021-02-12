@@ -13,7 +13,7 @@
 
 <script>
 import fetch_api from "../lib/fetch_api";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 import HeaderLarge from "../components/HeaderLarge";
 import MyShowCard from "../components/MyShowCard";
@@ -23,7 +23,6 @@ export default {
   components: { HeaderLarge, MyShowCard },
   setup() {
     const results = ref([]);
-
     onMounted(() => {
       async function get_fetch() {
         const option = {
@@ -43,10 +42,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .season-container {
-  position: relative;
-  height: 100vh;
   background: var(--background-primary);
 }
 
@@ -55,11 +52,12 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 .trending-options {
   width: 70%;
-  position: absolute;
-  top: 10vmin;
   display: grid;
+  z-index: 1;
+  margin-top: 10vmin;
   grid-template-columns: repeat(3, 1fr);
 }
 </style>

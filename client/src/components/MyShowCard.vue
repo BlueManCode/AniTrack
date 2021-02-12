@@ -46,7 +46,7 @@ export default {
 <style scoped>
 .card-search {
   width: 100%;
-  height: 16.5vmin;
+  height: 18vmin;
   background: var(--background-secondary);
   color: var(--text-color);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -85,8 +85,8 @@ export default {
 }
 
 .title {
-  width: 30rem;
-  font-size: xx-large;
+  width: 54vmin;
+  font-size: x-large;
   opacity: 90%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -94,7 +94,7 @@ export default {
 }
 
 .sub-data {
-  font-size: medium;
+  font-size: small;
   opacity: 60%;
   line-height: 2vmin;
   padding: 1vmin 0 2vmin 0;
