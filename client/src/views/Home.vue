@@ -9,16 +9,13 @@
         <div v-else>
           <InteractionSearch />
         </div>
-        <!-- <div class="card-container">
-          <MyShowCard />
-        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { reactive, computed } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
 
 import HeaderSmall from ".././components/HeaderSmall";

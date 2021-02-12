@@ -2,7 +2,9 @@
   <div v-if="type === 'SEARCH'" class="card-search">
     <img :src="data.coverImage.large || data.coverImage.medium" />
     <div class="data-container">
-      <div class="title">{{ data.title.english || "title not found" }}</div>
+      <div class="title">
+        {{ data.title.english || "title not found" }}
+      </div>
       <div class="sub-data">
         <div>
           {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
@@ -13,6 +15,24 @@
       <div class="not-added-btn">Add</div>
       <!-- <div class="added-btn">Added</div> -->
     </div>
+  </div>
+  <div v-if="type === 'TREND'" class="card-search-trending">
+    <div>{{ data.title.english || data.title.romaji }}</div>
+    <!-- <img :src="data.coverImage.large || data.coverImage.medium" />
+    <div class="data-container">
+      <div class="title">
+        {{ data.title.english || "title not found" }}
+      </div>
+      <div class="sub-data">
+        <div>
+          {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
+        </div>
+        <div>{{ "Episode count:  " + data.episodes }}</div>
+        <div>{{ "Status:  " + data.status.toLowerCase() }}</div>
+      </div>
+      <div class="not-added-btn">Add</div>
+      <div class="added-btn">Added</div>
+    </div> -->
   </div>
 </template>
 
@@ -27,6 +47,18 @@ export default {
 .card-search {
   width: 100%;
   height: 16.5vmin;
+  background: var(--background-secondary);
+  color: var(--text-color);
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin-top: 20px;
+  display: flex;
+  font-size: bolder;
+}
+
+.card-search-trending {
+  width: 45vmin;
+  height: 25vmin;
   background: var(--background-secondary);
   color: var(--text-color);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);

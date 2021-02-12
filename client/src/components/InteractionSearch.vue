@@ -10,7 +10,9 @@
     Search Results
   </div>
   <div class="card-container" v-for="show in search_results" :key="show.id">
-    <MyShowCard :type="'SEARCH'" :data="show" />
+    <div v-if="show.title.english">
+      <MyShowCard :type="'SEARCH'" :data="show" />
+    </div>
   </div>
 </template>
 
@@ -58,7 +60,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .interaction-search-container {
   width: 100%;
   display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <div class="header-small-container">
+  <div class="header-large-container">
     <div class="menu-option-container">
       <div class="menu-option" @click="this.$router.push('/')">
         <span
@@ -58,7 +58,7 @@
 <script>
 import { ref } from "vue";
 export default {
-  name: "HeaderSmall",
+  name: "HeaderLarge",
   setup() {
     const year = ref(new Date().getFullYear());
     return {
@@ -68,14 +68,15 @@ export default {
 };
 </script>
 
-<style>
-.header-small-container {
+<style scope>
+.header-large-container {
   width: 100%;
-  height: 13vmin;
+  height: 25vmin;
   background: var(--yellow-primary);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 2vmin;
 }
 
 .menu-option-container {
