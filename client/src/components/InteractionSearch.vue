@@ -83,7 +83,7 @@ label {
 
 input {
   width: 100%;
-  height: 7vmin;
+  height: 6vmin;
   padding-left: 2vmin;
   background: var(--background-secondary);
   border-style: none;
@@ -97,7 +97,7 @@ input {
 
 button {
   width: 25%;
-  height: 7vmin;
+  height: 6vmin;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   border-style: none;
@@ -127,5 +127,6 @@ button svg {
   letter-spacing: 0.2vmin;
   opacity: 90%;
   margin-top: 6vmin;
+  color: var(--text-color);
 }
 </style>

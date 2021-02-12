@@ -50,12 +50,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
-  line-height: 1rem;
+  padding: 2vmin;
+  line-height: 2vmin;
 }
 
 .menu-option-title {
-  font-size: large;
+  font-size: x-large;
   font-weight: bold;
   letter-spacing: 1px;
   opacity: 70%;
@@ -67,6 +67,6 @@ export default {
 
 .menu-option-year {
   opacity: 50%;
-  font-size: small;
+  font-size: medium;
 }
 </style>
