@@ -1,5 +1,6 @@
 import build_search_query from './build_query/build_search_query'
 import build_popular from './build_query/build_popular'
+import build_show from './build_query/build_show'
 
 async function fetch_function(query) {
   const url = "https://graphql.anilist.co"
@@ -24,6 +25,8 @@ export default function fetch_api(type, params = []) {
       case 'SEARCH': query = build_search_query(params)
       break
       case 'POPULAR': query = build_popular(params)
+      break
+      case 'SHOW': query = build_show(params)
       break
       default: console.log('invalid fetch request')
     } 

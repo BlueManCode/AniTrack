@@ -4,7 +4,7 @@
     <div class="trending-container">
       <div class="trending-options">
         <div v-for="show in results" :key="show.id">
-          <MyShowCard :type="'TREND'" :data="show" />
+          <TrendingCard :data="show" />
         </div>
       </div>
     </div>
@@ -13,23 +13,25 @@
 
 <script>
 import fetch_api from "../lib/fetch_api";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 
 import HeaderLarge from "../components/HeaderLarge";
-import MyShowCard from "../components/MyShowCard";
+import TrendingCard from "../components/TrendingCard";
 
 export default {
   name: "Fall",
-  components: { HeaderLarge, MyShowCard },
+  components: { HeaderLarge, TrendingCard },
   setup() {
     const results = ref([]);
     onMounted(() => {
+      console.log("fetching fall");
       async function get_fetch() {
         const option = {
           season: "FALL",
           season_year: new Date().getFullYear(),
         };
         const data = await fetch_api("POPULAR", option);
+        localStorage.setItem("trending_fall", JSON.stringify([]));
         results.value = data.data.Page.media;
       }
       get_fetch();
@@ -58,6 +60,6 @@ export default {
   display: grid;
   z-index: 1;
   margin-top: 10vmin;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 </style>

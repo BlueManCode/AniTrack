@@ -11,7 +11,7 @@
   </div>
   <div class="card-container" v-for="show in search_results" :key="show.id">
     <div v-if="show.title.english">
-      <MyShowCard :type="'SEARCH'" :data="show" />
+      <MyShowCard :data="show" />
     </div>
   </div>
 </template>
