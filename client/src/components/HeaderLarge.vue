@@ -49,7 +49,7 @@
           }"
           >Fall</span
         >
-        <span class="menu-option-year">{{ year }}</span>
+        <span class="menu-option-year">{{ year - 1 }}</span>
       </div>
     </div>
   </div>

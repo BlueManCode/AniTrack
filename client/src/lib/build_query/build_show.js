@@ -28,6 +28,7 @@ export default function build_show(params) {
     	nextAiringEpisode {
     	  id
     	}
+			episodes
   	}
   }
   `

@@ -1,25 +1,25 @@
 <template>
   <div v-if="show_data" class="trending-card-container">
-    <div class="cover-image-container">
-      <img :src="show_data.coverImage.large || show_data.coverImage.medium" />
-      <!-- <div class="cover-image-container-title"> -->
-      <div>{{ show_data.title.english || show_data.title.romaji }}</div>
-      <!-- </div> -->
+    <img :src="show_data.coverImage.large || show_data.coverImage.medium" />
+    <div class="card-data">
+      <div class="card-data-top">
+        {{
+          show_data.nextAiringEpisode
+            ? `Episode ${show_data.nextAiringEpisode.episode} of ${show_data.episodes}`
+            : "Ended on:"
+        }}
+      </div>
+      <div class="card-data-middle">
+        {{
+          show_data.nextAiringEpisode
+            ? show_data.nextAiringEpisode.timeUntilAiring
+            : show_data.endDate
+        }}
+      </div>
+      <div class="card-data-bottom">
+        {{ show_data.title.english || show_data.title.romaji }}
+      </div>
     </div>
-    <!-- <div class="data-container">
-      <div class="title">
-        {{ data.title.english || "title not found" }}
-      </div>
-      <div class="sub-data">
-        <div>
-          {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
-        </div>
-        <div>{{ "Episode count:  " + data.episodes }}</div>
-        <div>{{ "Status:  " + data.status.toLowerCase() }}</div>
-      </div>
-      <div class="not-added-btn">Add</div>
-      <div class="added-btn">Added</div>
-    </div> -->
   </div>
 </template>
 
@@ -35,10 +35,48 @@ export default {
     onMounted(() => {
       async function get_fetch() {
         const data = await fetch_api("SHOW", { id: props.data.id });
-        show_data.value = data.data.Media;
+        const res = data.data.Media;
+        show_data.value = res;
+        if (res.nextAiringEpisode) {
+          const result = await fetch_api("NEXT_AIRING", {
+            id: res.nextAiringEpisode.id,
+          });
+          show_data.value.nextAiringEpisode = result.data.AiringSchedule;
+          show_data.value.nextAiringEpisode.timeUntilAiring = convert_next_airing(
+            show_data.value.nextAiringEpisode.timeUntilAiring
+          );
+        } else {
+          show_data.value.endDate = convert_end_date(show_data.value.endDate);
+        }
       }
       get_fetch();
     });
+
+    function convert_next_airing(time_remaining) {
+      return {
+        day: Math.floor(time_remaining / (3600 * 24)),
+        hour: Math.floor((time_remaining % (3600 * 24)) / 3600),
+        min: Math.floor((time_remaining % 3600) / 60),
+      };
+    }
+
+    function convert_end_date(endDate) {
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      return `${endDate.day + " " + months[endDate.month - 1]}`;
+    }
 
     return {
       show_data,
@@ -49,8 +87,8 @@ export default {
 
 <style scoped>
 .trending-card-container {
-  width: 70vmin;
-  height: 35vmin;
+  width: 60vmin;
+  height: 18vmin;
   background: var(--background-secondary);
   color: var(--text-color);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -66,72 +104,19 @@ img {
   border-radius: 6px 0 0 6px;
 }
 
-.cover-image-container {
-  position: relative;
-}
-
-.cover-image-container div {
-  position: absolute;
-  bottom: 0;
-  background-image: rgba(0, 0, 0, 0.5);
-}
-
-/* .cover-image-container-title {
-  background: 
-} */
-
-/* .data-container {
-  font-family: "Overpass", sans-serif;
-  font-weight: bolder;
-  padding: 1vmin 0 1vmin 5vmin;
+.card-data {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-} */
-
-/*
-.title {
-  width: 54vmin;
-  font-size: x-large;
-  opacity: 90%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  width: 100%;
+  padding-left: 2vmin;
 }
 
-.sub-data {
-  font-size: small;
-  opacity: 60%;
-  line-height: 2vmin;
-  padding: 1vmin 0 2vmin 0;
-  font-weight: bolder;
+.card-data-top {
 }
 
-.not-added-btn {
-  width: 9vmin;
-  height: 2vmin;
-  border-radius: 4vmin;
-  font-size: x-small;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  border: 2px solid;
-  border-color: var(--text-color);
+.card-data-middle {
 }
 
-.added-btn {
-  width: 9vmin;
-  height: 2vmin;
-  border-radius: 4vmin;
-  font-size: x-small;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  border: 2px solid;
-  border-color: var(--yellow-primary);
-  background: var(--yellow-primary);
+.card-data-bottom {
 }
-*/
 </style>

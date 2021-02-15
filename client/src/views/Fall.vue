@@ -28,7 +28,7 @@ export default {
       async function get_fetch() {
         const option = {
           season: "FALL",
-          season_year: new Date().getFullYear(),
+          season_year: new Date().getFullYear() - 1,
         };
         const data = await fetch_api("POPULAR", option);
         localStorage.setItem("trending_fall", JSON.stringify([]));
@@ -56,10 +56,10 @@ export default {
 }
 
 .trending-options {
-  width: 70%;
+  width: 90%;
   display: grid;
   z-index: 1;
   margin-top: 10vmin;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 </style>
