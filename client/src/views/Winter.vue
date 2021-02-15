@@ -3,8 +3,8 @@
     <HeaderLarge />
     <div class="trending-container">
       <div class="trending-options">
-        <div v-for="show in results" :key="show.id">
-          <MyShowCard :type="'TREND'" :data="show" />
+        <div v-for="(show, index) in results" :key="index">
+          <TrendingCard :data="show" :index="index" />
         </div>
       </div>
     </div>
@@ -13,23 +13,25 @@
 
 <script>
 import fetch_api from "../lib/fetch_api";
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 
 import HeaderLarge from "../components/HeaderLarge";
-import MyShowCard from "../components/MyShowCard";
+import TrendingCard from "../components/TrendingCard";
 
 export default {
   name: "Winter",
-  components: { HeaderLarge, MyShowCard },
+  components: { HeaderLarge, TrendingCard },
   setup() {
     const results = ref([]);
     onMounted(() => {
+      console.log("fetching fall");
       async function get_fetch() {
         const option = {
           season: "WINTER",
           season_year: new Date().getFullYear(),
         };
         const data = await fetch_api("POPULAR", option);
+        localStorage.setItem("trending_winter", JSON.stringify([]));
         results.value = data.data.Page.media;
       }
       get_fetch();
@@ -54,7 +56,7 @@ export default {
 }
 
 .trending-options {
-  width: 70%;
+  width: 90%;
   display: grid;
   z-index: 1;
   margin-top: 10vmin;

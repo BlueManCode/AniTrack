@@ -3,8 +3,8 @@
     <HeaderLarge />
     <div class="trending-container">
       <div class="trending-options">
-        <div v-for="show in results" :key="show.id">
-          <TrendingCard :data="show" />
+        <div v-for="(show, index) in results" :key="index">
+          <TrendingCard :data="show" :index="index" />
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@ export default {
       async function get_fetch() {
         const option = {
           season: "FALL",
-          season_year: new Date().getFullYear() - 1,
+          season_year: new Date().getFullYear(),
         };
         const data = await fetch_api("POPULAR", option);
         localStorage.setItem("trending_fall", JSON.stringify([]));

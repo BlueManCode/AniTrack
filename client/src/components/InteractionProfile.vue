@@ -47,7 +47,7 @@ form {
 }
 
 label {
-  font-size: larger;
+  font-size: 2.5vmin;
   font-weight: bolder;
   opacity: 70%;
   margin-top: 2vmin;
@@ -67,6 +67,18 @@ select {
   padding-left: 10px;
   opacity: 80%;
   font-size: medium;
+}
+
+select:focus {
+  outline: none;
+}
+
+select-items {
+  background: red;
+}
+
+option:focus {
+  outline: none;
 }
 
 button {

@@ -9,7 +9,7 @@
         <div>
           {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
         </div>
-        <div>{{ "Episode count:  " + data.episodes }}</div>
+        <div>{{ "Episodes:  " + data.episodes }}</div>
         <div>{{ "Status:  " + data.status.toLowerCase() }}</div>
       </div>
       <div class="not-added-btn">Add</div>
@@ -58,17 +58,15 @@ export default {
 
 .data-container {
   font-family: "Overpass", sans-serif;
-  font-weight: bolder;
   padding: 1vmin 0 1vmin 5vmin;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* justify-content: space-around; */
 }
 
 .title {
   width: 54vmin;
-  font-size: x-large;
+  font-size: 3vmin;
   opacity: 90%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -76,31 +74,29 @@ export default {
 }
 
 .sub-data {
-  font-size: small;
+  font-size: 1.8vmin;
   opacity: 60%;
-  line-height: 2vmin;
   padding: 1vmin 0 2vmin 0;
-  font-weight: bolder;
 }
 
 .not-added-btn {
   width: 9vmin;
-  height: 2vmin;
+  height: 3vmin;
   border-radius: 4vmin;
-  font-size: x-small;
+  font-size: 1.8vmin;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  border: 2px solid;
+  border: 1px solid;
   border-color: var(--text-color);
 }
 
 .added-btn {
   width: 9vmin;
-  height: 2vmin;
+  height: 3vmin;
   border-radius: 4vmin;
-  font-size: x-small;
+  font-size: 1.8vmin;
   display: flex;
   justify-content: center;
   align-items: center;

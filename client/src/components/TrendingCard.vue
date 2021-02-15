@@ -2,23 +2,50 @@
   <div v-if="show_data" class="trending-card-container">
     <img :src="show_data.coverImage.large || show_data.coverImage.medium" />
     <div class="card-data">
-      <div class="card-data-top">
+      <div v-if="show_data.status !== 'NOT_YET_RELEASED'" class="card-data-top">
         {{
           show_data.nextAiringEpisode
-            ? `Episode ${show_data.nextAiringEpisode.episode} of ${show_data.episodes}`
+            ? `Episode ${show_data.nextAiringEpisode.episode} of ${
+                show_data.episodes || "TBD"
+              }`
             : "Ended on:"
         }}
       </div>
-      <div class="card-data-middle">
+      <div v-else class="card-data-top">Starts in</div>
+      <div
+        v-if="show_data.status !== 'NOT_YET_RELEASED'"
+        class="card-data-middle"
+      >
         {{
           show_data.nextAiringEpisode
-            ? show_data.nextAiringEpisode.timeUntilAiring
+            ? show_data.nextAiringEpisode.timeUntilAiring.day +
+              " Day, " +
+              show_data.nextAiringEpisode.timeUntilAiring.hour +
+              " hrs"
             : show_data.endDate
+        }}
+      </div>
+      <div v-else class="card-data-middle">
+        {{
+          show_data.nextAiringEpisode
+            ? show_data.nextAiringEpisode.timeUntilAiring.day +
+              " Day, " +
+              show_data.nextAiringEpisode.timeUntilAiring.hour +
+              " hrs"
+            : "TBD"
         }}
       </div>
       <div class="card-data-bottom">
         {{ show_data.title.english || show_data.title.romaji }}
       </div>
+    </div>
+    <div class="card-interaction">
+      <div>{{ "#" + (index + 1) }}</div>
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
     </div>
   </div>
 </template>
@@ -29,9 +56,10 @@ import fetch_api from "../lib/fetch_api";
 
 export default {
   name: "TrendingCard",
-  props: ["data"],
+  props: ["data", "index"],
   setup(props) {
     const show_data = ref(null);
+
     onMounted(() => {
       async function get_fetch() {
         const data = await fetch_api("SHOW", { id: props.data.id });
@@ -107,16 +135,46 @@ img {
 .card-data {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding-left: 2vmin;
+  width: 60%;
+  padding: 2vmin 0 0 2vmin;
 }
 
 .card-data-top {
+  opacity: 60%;
+  font-weight: bold;
+  font-size: 1.75vmin;
 }
 
 .card-data-middle {
+  font-weight: bolder;
+  font-size: 4vmin;
 }
 
 .card-data-bottom {
+  opacity: 60%;
+  font-weight: bold;
+  font-size: 1.75vmin;
+}
+
+.card-interaction {
+  width: 20%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1vmin 1vmin 1vmin 0;
+}
+
+.card-interaction svg {
+  width: 3vmin;
+  stroke: var(--yellow-primary);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.card-interaction div {
+  font-size: 4vmin;
+  opacity: 90%;
 }
 </style>

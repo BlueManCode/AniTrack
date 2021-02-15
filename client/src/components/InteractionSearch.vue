@@ -77,7 +77,7 @@ form {
 }
 
 label {
-  font-size: larger;
+  font-size: 2.5vmin;
   font-weight: bolder;
   opacity: 70%;
   margin-top: 2vmin;
@@ -94,7 +94,11 @@ input {
   border-radius: 6px;
   font-family: "Overpass", sans-serif;
   font-weight: bold;
-  font-size: medium;
+  font-size: 2.3vmin;
+}
+
+input:focus {
+  outline: none;
 }
 
 button {
