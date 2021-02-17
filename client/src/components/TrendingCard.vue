@@ -112,6 +112,7 @@ img {
 .card-data-middle {
   font-weight: bolder;
   font-size: 3.5vmin;
+  opacity: 90%;
 }
 
 .card-data-bottom {
