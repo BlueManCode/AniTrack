@@ -23,8 +23,8 @@
         {{
           next_airining
             ? next_airining.day + " Day, " + next_airining.hour + " hrs"
-            : start_date
-            ? start_date
+            : data.startDate.month
+            ? start_date + " " + data.startDate.year
             : "TBD"
         }}
       </div>
@@ -91,7 +91,7 @@ export default {
 }
 
 img {
-  width: auto;
+  width: 13vmin;
   height: 100%;
   border-radius: 6px 0 0 6px;
 }
@@ -106,18 +106,18 @@ img {
 .card-data-top {
   opacity: 60%;
   font-weight: bold;
-  font-size: 1.75vmin;
+  font-size: 1.65vmin;
 }
 
 .card-data-middle {
   font-weight: bolder;
-  font-size: 4vmin;
+  font-size: 3.5vmin;
 }
 
 .card-data-bottom {
   opacity: 60%;
   font-weight: bold;
-  font-size: 1.75vmin;
+  font-size: 1.65vmin;
 }
 
 .card-interaction {
