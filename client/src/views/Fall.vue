@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import fetch_api from "../lib/fetch_api";
 import { ref, onMounted } from "vue";
 
+import fetch_shows_trending from "../lib/fetch_shows_trending";
 import HeaderLarge from "../components/HeaderLarge";
 import TrendingCard from "../components/TrendingCard";
 
@@ -22,21 +22,16 @@ export default {
   name: "Fall",
   components: { HeaderLarge, TrendingCard },
   setup() {
+    // check if cache data exist
     const results = ref([]);
-    onMounted(() => {
-      console.log("fetching fall");
-      async function get_fetch() {
-        const option = {
-          season: "FALL",
-          season_year: new Date().getFullYear(),
-        };
-        const data = await fetch_api("POPULAR", option);
-        localStorage.setItem("trending_fall", JSON.stringify([]));
-        results.value = data.data.Page.media;
-      }
-      get_fetch();
+    onMounted(async () => {
+      const fetch_options = {
+        season: "FALL",
+        cache_unit: "trending_fall",
+        season_year: new Date().getFullYear() - 1,
+      };
+      await fetch_shows_trending(results, fetch_options);
     });
-
     return {
       results,
     };

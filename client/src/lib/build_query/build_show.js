@@ -2,6 +2,7 @@ export default function build_show(params) {
   return `
   query {
     Media(id: ${params.id}) {
+			id
     	coverImage {
     	  extraLarge
     	  large

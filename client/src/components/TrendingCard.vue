@@ -1,42 +1,35 @@
 <template>
-  <div v-if="show_data" class="trending-card-container">
-    <img :src="show_data.coverImage.large || show_data.coverImage.medium" />
+  <div v-if="data" class="trending-card-container">
+    <img :src="data.coverImage.large || data.coverImage.medium" />
     <div class="card-data">
-      <div v-if="show_data.status !== 'NOT_YET_RELEASED'" class="card-data-top">
+      <div v-if="data.status !== 'NOT_YET_RELEASED'" class="card-data-top">
         {{
-          show_data.nextAiringEpisode
-            ? `Episode ${show_data.nextAiringEpisode.episode} of ${
-                show_data.episodes || "TBD"
+          data.nextAiringEpisode
+            ? `Episode ${data.nextAiringEpisode.episode} of ${
+                data.episodes || "TBD"
               }`
             : "Ended on:"
         }}
       </div>
       <div v-else class="card-data-top">Starts in</div>
-      <div
-        v-if="show_data.status !== 'NOT_YET_RELEASED'"
-        class="card-data-middle"
-      >
+      <div v-if="data.status !== 'NOT_YET_RELEASED'" class="card-data-middle">
         {{
-          show_data.nextAiringEpisode
-            ? show_data.nextAiringEpisode.timeUntilAiring.day +
-              " Day, " +
-              show_data.nextAiringEpisode.timeUntilAiring.hour +
-              " hrs"
-            : show_data.endDate
+          next_airining
+            ? next_airining.day + " Day, " + next_airining.hour + " hrs"
+            : end_date
         }}
       </div>
       <div v-else class="card-data-middle">
         {{
-          show_data.nextAiringEpisode
-            ? show_data.nextAiringEpisode.timeUntilAiring.day +
-              " Day, " +
-              show_data.nextAiringEpisode.timeUntilAiring.hour +
-              " hrs"
+          next_airining
+            ? next_airining.day + " Day, " + next_airining.hour + " hrs"
+            : start_date
+            ? start_date
             : "TBD"
         }}
       </div>
       <div class="card-data-bottom">
-        {{ show_data.title.english || show_data.title.romaji }}
+        {{ data.title.english || data.title.romaji }}
       </div>
     </div>
     <div class="card-interaction">
@@ -52,62 +45,33 @@
 
 <script>
 import { onMounted, ref } from "vue";
-import fetch_api from "../lib/fetch_api";
+
+import {
+  convert_next_airing,
+  convert_end_date,
+} from "../lib/fetch_shows_trending";
 
 export default {
   name: "TrendingCard",
   props: ["data", "index"],
   setup(props) {
-    const show_data = ref(null);
-
-    onMounted(() => {
-      async function get_fetch() {
-        const data = await fetch_api("SHOW", { id: props.data.id });
-        const res = data.data.Media;
-        show_data.value = res;
-        if (res.nextAiringEpisode) {
-          const result = await fetch_api("NEXT_AIRING", {
-            id: res.nextAiringEpisode.id,
-          });
-          show_data.value.nextAiringEpisode = result.data.AiringSchedule;
-          show_data.value.nextAiringEpisode.timeUntilAiring = convert_next_airing(
-            show_data.value.nextAiringEpisode.timeUntilAiring
-          );
-        } else {
-          show_data.value.endDate = convert_end_date(show_data.value.endDate);
-        }
+    const end_date = ref(null);
+    const start_date = ref(null);
+    const next_airining = ref(null);
+    onMounted(async () => {
+      if (!props.data.nextAiringEpisode) {
+        end_date.value = await convert_end_date(props.data.endDate);
+        start_date.value = await convert_end_date(props.data.startDate);
+      } else {
+        next_airining.value = await convert_next_airing(
+          props.data.nextAiringEpisode.timeUntilAiring
+        );
       }
-      get_fetch();
     });
-
-    function convert_next_airing(time_remaining) {
-      return {
-        day: Math.floor(time_remaining / (3600 * 24)),
-        hour: Math.floor((time_remaining % (3600 * 24)) / 3600),
-        min: Math.floor((time_remaining % 3600) / 60),
-      };
-    }
-
-    function convert_end_date(endDate) {
-      const months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-      return `${endDate.day + " " + months[endDate.month - 1]}`;
-    }
-
     return {
-      show_data,
+      end_date,
+      next_airining,
+      start_date,
     };
   },
 };
@@ -115,7 +79,7 @@ export default {
 
 <style scoped>
 .trending-card-container {
-  width: 60vmin;
+  width: 57vmin;
   height: 18vmin;
   background: var(--background-secondary);
   color: var(--text-color);
