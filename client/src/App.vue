@@ -17,8 +17,13 @@ export default {
     };
   },
   created() {
+    // check for theme
     localStorage.setItem("is_dark_theme", JSON.stringify(this.is_dark_theme));
     this.store.commit("toggle_theme");
+
+    if (!localStorage.getItem("added_shows")) {
+      localStorage.setItem("added_shows", JSON.stringify([]));
+    }
   },
 };
 </script>

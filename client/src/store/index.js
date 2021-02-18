@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     is_dark_theme: JSON.parse(localStorage.getItem('is_dark_theme')) ? JSON.parse(localStorage.getItem('is_dark_theme')) : false,
-    is_show_profile: true
+    is_show_profile: true,
+    added_shows: JSON.parse(localStorage.getItem('added_shows'))
   },
   mutations: {
     toggle_theme(state) {

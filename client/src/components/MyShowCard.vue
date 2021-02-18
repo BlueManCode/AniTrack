@@ -12,16 +12,63 @@
         <div>{{ "Episodes:  " + data.episodes }}</div>
         <div>{{ "Status:  " + data.status.toLowerCase() }}</div>
       </div>
-      <div class="not-added-btn">Add</div>
-      <!-- <div class="added-btn">Added</div> -->
+      <div v-if="!isAdded" @click="handle_add_show" class="not-added-btn">
+        Add
+      </div>
+      <div v-else>
+        <ShowDropDown :data="data" :isAdded="isAdded" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
+import ShowDropDown from "../components/ShowDropDown";
 export default {
   name: "MyShowCard",
   props: ["data"],
+  components: {
+    ShowDropDown,
+  },
+  setup(props) {
+    const isAdded = ref(false);
+    function handle_add_show() {
+      isAdded.value = !isAdded.value;
+
+      function handle_filter(item) {
+        return item.id !== props.data.id;
+      }
+
+      // get the local storage ref
+      const ls = JSON.parse(localStorage.getItem("added_shows"));
+
+      // if added
+      if (isAdded.value) {
+        ls.push(props.data);
+        localStorage.setItem("added_shows", JSON.stringify(ls));
+      }
+      // not added
+      else {
+        const filtered = ls.filter((item) => handle_filter(item));
+        console.log(filtered);
+        localStorage.setItem("added_shows", JSON.stringify(filtered));
+      }
+    }
+
+    return {
+      isAdded,
+      handle_add_show,
+    };
+  },
+  mounted() {
+    const ls = JSON.parse(localStorage.getItem("added_shows"));
+    ls.forEach((element) => {
+      if (element.id === this.$props.data.id) {
+        this.isAdded = true;
+      }
+    });
+  },
 };
 </script>
 
@@ -83,26 +130,13 @@ export default {
   width: 9vmin;
   height: 3vmin;
   border-radius: 4vmin;
-  font-size: 1.8vmin;
+  font-size: 1.5vmin;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   border: 1px solid;
   border-color: var(--text-color);
-}
-
-.added-btn {
-  width: 9vmin;
-  height: 3vmin;
-  border-radius: 4vmin;
-  font-size: 1.8vmin;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  border: 2px solid;
-  border-color: var(--yellow-primary);
-  background: var(--yellow-primary);
+  cursor: pointer;
 }
 </style>
