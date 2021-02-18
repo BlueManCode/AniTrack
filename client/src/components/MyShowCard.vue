@@ -84,7 +84,7 @@ export default {
 <style scoped>
 .card-search {
   width: 100%;
-  height: 18vmin;
+  height: 20vmin;
   background: var(--background-secondary);
   color: var(--text-color);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -136,14 +136,12 @@ export default {
 }
 
 .not-added-btn {
-  width: 9vmin;
-  height: 3vmin;
-  border-radius: 4vmin;
-  font-size: 1.5vmin;
+  width: 150px;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  padding: 0.3vmin;
   border: 1px solid;
   border-color: var(--text-color);
   cursor: pointer;

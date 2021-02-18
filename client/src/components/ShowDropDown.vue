@@ -61,29 +61,33 @@ export default {
         case "dropped":
           option_selected.value = options.value.DROPPED;
           update_status(props.data.id, "dropped");
-          toggle_container();
+          is_container_open.value = false;
           break;
         case "watching":
           option_selected.value = options.value.WATCHING;
-          toggle_container();
+          update_status(props.data.id, "watching");
+          is_container_open.value = false;
           break;
         case "plan to watch":
           option_selected.value = options.value.PLAN_TO_WATCH;
-          toggle_container();
+          update_status(props.data.id, "plan to watch");
+          is_container_open.value = false;
           break;
         case "completed":
           option_selected.value = options.value.COMPLETED;
-          toggle_container();
+          update_status(props.data.id, "completed");
+          is_container_open.value = false;
           break;
         case "on hold":
           option_selected.value = options.value.ON_HOLD;
-          toggle_container();
+          update_status(props.data.id, "on hold");
+          is_container_open.value = false;
           break;
         case "clear":
           const filter = ls.filter((item) => item.id !== props.data.id);
           localStorage.setItem("added_shows", JSON.stringify(filter));
           props.handle_add_show();
-          toggle_container();
+          is_container_open.value = false;
           break;
       }
     }
@@ -123,16 +127,27 @@ export default {
   position: relative;
   background: var(--background-primary);
   width: 150px;
+  cursor: pointer;
 }
 .option-selected {
   color: white;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5vmin;
 }
 .option-container {
   width: inherit;
   position: absolute;
   z-index: 1;
   background: var(--background-secondary);
-  border-radius: 0.5vmin;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+.options {
+  padding: 1.5vmin 0 0 1.5vmin;
 }
 .options:hover {
   background: var(--background-primary);
