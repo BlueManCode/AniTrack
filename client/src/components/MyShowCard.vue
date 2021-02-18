@@ -16,7 +16,11 @@
         Add
       </div>
       <div v-else>
-        <ShowDropDown :data="data" :isAdded="isAdded" />
+        <ShowDropDown
+          :data="show_data"
+          :handle_add_show="handle_add_show"
+          :isAdded="isAdded"
+        />
       </div>
     </div>
   </div>
@@ -33,6 +37,8 @@ export default {
   },
   setup(props) {
     const isAdded = ref(false);
+    const show_data = ref(props.data);
+
     function handle_add_show() {
       isAdded.value = !isAdded.value;
 
@@ -45,19 +51,21 @@ export default {
 
       // if added
       if (isAdded.value) {
-        ls.push(props.data);
+        let user_show_data = props.data;
+        user_show_data.status = "watching";
+        ls.push(user_show_data);
         localStorage.setItem("added_shows", JSON.stringify(ls));
       }
       // not added
       else {
         const filtered = ls.filter((item) => handle_filter(item));
-        console.log(filtered);
         localStorage.setItem("added_shows", JSON.stringify(filtered));
       }
     }
 
     return {
       isAdded,
+      show_data,
       handle_add_show,
     };
   },
@@ -66,6 +74,7 @@ export default {
     ls.forEach((element) => {
       if (element.id === this.$props.data.id) {
         this.isAdded = true;
+        this.show_data.status = element.status;
       }
     });
   },

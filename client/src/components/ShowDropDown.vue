@@ -1,12 +1,18 @@
 <template>
   <div class="drop-down-container">
-    <div class="option-selected">{{ optionSelected.name }}</div>
-    <div class="option-container">
+    <div
+      @click="toggle_container"
+      class="option-selected"
+      :style="{ background: option_selected.color }"
+    >
+      {{ option_selected.name }}
+    </div>
+    <div v-if="is_container_open" class="option-container">
       <div v-for="(option, index) in options" :key="index">
         <div
-          @click="handle_option_selected(option)"
+          @click="handle_option_selected(option.name)"
           class="options"
-          v-if="option != optionSelected"
+          v-if="option != option_selected"
         >
           {{ option.name }}
         </div>
@@ -16,64 +22,97 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 export default {
   name: "ShowDropDown",
-  props: ["data", "isAdded"],
+  props: ["data", "handle_add_show", "isAdded"],
   setup(props) {
     const options = ref({
       WATCHING: {
         name: "watching",
+        color: "#D9B60C",
       },
       PLAN_TO_WATCH: {
         name: "plan to watch",
+        color: "#0C45D9",
       },
       ON_HOLD: {
         name: "on hold",
+        color: "#BE1212",
       },
       DROPPED: {
         name: "dropped",
+        color: "#BE1212",
       },
       COMPLETED: {
         name: "completed",
+        color: "#4BB543",
       },
       CLEAR: {
         name: "clear",
       },
     });
-    const optionSelected = ref(options.value.WATCHING);
+    const option_selected = ref(options.value.WATCHING);
+    const is_container_open = ref(false);
 
-    function handle_option_selected(option) {
-      switch (option.name) {
+    function handle_option_selected(status) {
+      const ls = JSON.parse(localStorage.getItem("added_shows"));
+      switch (status) {
         case "dropped":
-          optionSelected.value = options.value.DROPPED;
+          option_selected.value = options.value.DROPPED;
+          update_status(props.data.id, "dropped");
+          toggle_container();
           break;
         case "watching":
-          optionSelected.value = options.value.WATCHING;
+          option_selected.value = options.value.WATCHING;
+          toggle_container();
           break;
         case "plan to watch":
-          optionSelected.value = options.value.PLAN_TO_WATCH;
+          option_selected.value = options.value.PLAN_TO_WATCH;
+          toggle_container();
           break;
         case "completed":
-          optionSelected.value = options.value.COMPLETED;
+          option_selected.value = options.value.COMPLETED;
+          toggle_container();
           break;
         case "on hold":
-          optionSelected.value = options.value.ON_HOLD;
+          option_selected.value = options.value.ON_HOLD;
+          toggle_container();
           break;
         case "clear":
-          const ls = JSON.parse(localStorage.getItem("added_shows"));
           const filter = ls.filter((item) => item.id !== props.data.id);
           localStorage.setItem("added_shows", JSON.stringify(filter));
-          props.isAdded = false;
-          console.log(props.isAdded);
+          props.handle_add_show();
+          toggle_container();
           break;
       }
     }
 
+    function update_status(id, status) {
+      const ls = JSON.parse(localStorage.getItem("added_shows"));
+      ls.forEach((element, index) => {
+        if (element.id === id) {
+          ls[index].status = status;
+          console.log(ls[index].status);
+        }
+      });
+      localStorage.setItem("added_shows", JSON.stringify(ls));
+    }
+
+    function toggle_container() {
+      is_container_open.value = !is_container_open.value;
+    }
+
+    onMounted(() => {
+      handle_option_selected(props.data.status);
+    });
+
     return {
       options,
-      optionSelected,
+      option_selected,
+      is_container_open,
       handle_option_selected,
+      toggle_container,
     };
   },
 };
@@ -86,6 +125,7 @@ export default {
   width: 150px;
 }
 .option-selected {
+  color: white;
 }
 .option-container {
   width: inherit;
