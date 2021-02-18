@@ -7,3 +7,4 @@
 - [ ] show added show with upcoming episodes
 - [ ] export show lists
 - [ ] add and release an electron app
+- [ ] dummy
