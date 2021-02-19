@@ -2,7 +2,7 @@
   <div class="interaction-search-container">
     <form>
       <label>Profile Option</label>
-      <div class="profile-selector">
+      <div @click="toggle_option_container" class="profile-selector">
         <div
           :style="{
             padding: '0 0 0 2vmin',
@@ -10,7 +10,7 @@
         >
           {{ option_selected.name }}
         </div>
-        <div class="options-container">
+        <div v-if="is_container_open" class="options-container">
           <div
             class="profile-selector-options"
             v-for="(option, index) in options"
@@ -29,14 +29,20 @@
     </form>
     <button @click="handle_interaction_toggle">Search</button>
   </div>
+  <div class="profiles-container">
+    <Watching />
+  </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
 
+import Watching from "../components/Watching";
+
 export default {
   name: "InteractionProfile",
+  components: { Watching },
   setup() {
     const options = ref({
       WATCHING: {
@@ -59,44 +65,36 @@ export default {
       },
     });
     const option_selected = ref(options.value.WATCHING);
+    const is_container_open = ref(false);
     const store = useStore();
 
     function handle_interaction_toggle() {
       store.commit("toggle_profile");
     }
 
+    function toggle_option_container() {
+      is_container_open.value = !is_container_open.value;
+    }
+
     function handle_option_selected(status) {
-      // const ls = JSON.parse(localStorage.getItem("added_shows"));
       switch (status) {
         case "dropped":
           option_selected.value = options.value.DROPPED;
-          // update_status(props.data.id, "dropped");
-          // is_container_open.value = false;
           break;
         case "watching":
           option_selected.value = options.value.WATCHING;
-          // update_status(props.data.id, "watching");
-          // is_container_open.value = false;
           break;
         case "plan to watch":
           option_selected.value = options.value.PLAN_TO_WATCH;
-          // update_status(props.data.id, "plan to watch");
-          // is_container_open.value = false;
           break;
         case "completed":
           option_selected.value = options.value.COMPLETED;
-          // update_status(props.data.id, "completed");
-          // is_container_open.value = false;
           break;
         case "on hold":
           option_selected.value = options.value.ON_HOLD;
-          // update_status(props.data.id, "on hold");
-          // is_container_open.value = false;
           break;
         case "status":
           option_selected.value = options.value.STATUS;
-          // update_status(props.data.id, "on hold");
-          // is_container_open.value = false;
           break;
       }
     }
@@ -104,8 +102,10 @@ export default {
     return {
       options,
       option_selected,
+      is_container_open,
       handle_interaction_toggle,
       handle_option_selected,
+      toggle_option_container,
     };
   },
 };
@@ -183,5 +183,10 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.profiles-container {
+  background: red;
+  padding-top: 10vmin;
 }
 </style>

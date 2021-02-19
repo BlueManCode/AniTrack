@@ -96,8 +96,7 @@ export default {
       const ls = JSON.parse(localStorage.getItem("added_shows"));
       ls.forEach((element, index) => {
         if (element.id === id) {
-          ls[index].status = status;
-          console.log(ls[index].status);
+          ls[index].user_show_data.status = status;
         }
       });
       localStorage.setItem("added_shows", JSON.stringify(ls));
@@ -108,7 +107,7 @@ export default {
     }
 
     onMounted(() => {
-      handle_option_selected(props.data.status);
+      handle_option_selected(props.data.user_show_data.status);
     });
 
     return {

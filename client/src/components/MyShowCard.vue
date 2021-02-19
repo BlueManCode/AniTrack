@@ -52,7 +52,7 @@ export default {
       // if added
       if (isAdded.value) {
         let user_show_data = props.data;
-        user_show_data.status = "watching";
+        user_show_data.user_show_data.status = "watching";
         ls.push(user_show_data);
         localStorage.setItem("added_shows", JSON.stringify(ls));
       }

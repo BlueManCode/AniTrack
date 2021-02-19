@@ -6,5 +6,4 @@
 - [ ] add shows directly from the trending pages
 - [ ] show added show with upcoming episodes
 - [ ] export show lists
-- [ ] add and release an electron app
-- [ ] dummy task
+- [ ] add and release an electron app version 1
