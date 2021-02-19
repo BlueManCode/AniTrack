@@ -1,7 +1,7 @@
 <template>
   <div>Watching</div>
   <div v-for="(show, index) in shows" :key="index">
-    <SearchCard :data="show" />
+    <SearchShowCard :data="show" />
   </div>
 </template>
 
@@ -10,11 +10,11 @@
 import { ref } from "vue";
 
 // components
-import SearchCard from "../components/SearchCard";
+import SearchShowCard from "../components/SearchShowCard";
 
 export default {
   name: "Watching",
-  components: { SearchCard },
+  components: { SearchShowCard },
   setup() {
     const shows = ref([]);
     return {

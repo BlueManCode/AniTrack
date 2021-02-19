@@ -1,22 +1,26 @@
 <template>
-  <div class="card-search">
+  <div class="search-card-container">
     <img :src="data.coverImage.large || data.coverImage.medium" />
-    <div class="data-container">
-      <div class="title">
+    <div class="search-card-data-container">
+      <div class="search-card-data-title">
         {{ data.title.english || "title not found" }}
       </div>
-      <div class="sub-data">
+      <div class="search-card-sub-data-container">
         <div>
           {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
         </div>
         <div>{{ "Episodes:  " + data.episodes }}</div>
         <div>{{ "Status:  " + data.status.toLowerCase() }}</div>
       </div>
-      <div v-if="!isAdded" @click="handle_add_show" class="not-added-btn">
+      <div
+        v-if="!isAdded"
+        @click="handle_add_show"
+        class="search-card-button-not-added"
+      >
         Add
       </div>
       <div v-else>
-        <ShowDropDown
+        <ShowStatusSelector
           :data="show_data"
           :handle_add_show="handle_add_show"
           :isAdded="isAdded"
@@ -31,13 +35,13 @@
 import { ref } from "vue";
 
 // components
-import ShowDropDown from "../components/ShowDropDown";
+import ShowStatusSelector from "../components/ShowStatusSelector";
 
 export default {
-  name: "SearchCard",
+  name: "SearchShowCard",
   props: ["data"],
   components: {
-    ShowDropDown,
+    ShowStatusSelector,
   },
   setup(props) {
     const isAdded = ref(false);
@@ -86,21 +90,9 @@ export default {
 </script>
 
 <style scoped>
-.card-search {
+.search-card-container {
   width: 100%;
   height: 20vmin;
-  background: var(--background-secondary);
-  color: var(--text-color);
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  margin-top: 20px;
-  display: flex;
-  font-size: bolder;
-}
-
-.card-search-trending {
-  width: 70vmin;
-  height: 35vmin;
   background: var(--background-secondary);
   color: var(--text-color);
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -116,7 +108,7 @@ export default {
   border-radius: 6px 0 0 6px;
 }
 
-.data-container {
+.search-card-data-container {
   font-family: "Overpass", sans-serif;
   padding: 1vmin 0 1vmin 5vmin;
   display: flex;
@@ -124,7 +116,7 @@ export default {
   justify-content: center;
 }
 
-.title {
+.search-card-data-title {
   width: 54vmin;
   font-size: 3vmin;
   opacity: 90%;
@@ -133,13 +125,13 @@ export default {
   white-space: nowrap;
 }
 
-.sub-data {
+.search-card-sub-data-container {
   font-size: 1.8vmin;
   opacity: 60%;
   padding: 1vmin 0 2vmin 0;
 }
 
-.not-added-btn {
+.search-card-button-not-added {
   width: 150px;
   border-radius: 3px;
   display: flex;

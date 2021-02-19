@@ -1,17 +1,20 @@
 <template>
-  <div class="drop-down-container">
+  <div class="show-status-selector-container">
     <div
       @click="toggle_container"
-      class="option-selected"
+      class="show-status-selector-option-selected"
       :style="{ background: option_selected.color }"
     >
       {{ option_selected.name }}
     </div>
-    <div v-if="is_container_open" class="option-container">
+    <div
+      v-if="is_container_open"
+      class="show-status-selector-options-container"
+    >
       <div v-for="(option, index) in options" :key="index">
         <div
           @click="handle_option_selected(option.name)"
-          class="options"
+          class="show-status-selector-option"
           v-if="option != option_selected"
         >
           {{ option.name }}
@@ -26,7 +29,7 @@
 import { ref, onMounted } from "vue";
 
 export default {
-  name: "ShowDropDown",
+  name: "ShowStatusSelector",
   props: ["data", "handle_add_show", "isAdded"],
   setup(props) {
     const options = ref({
@@ -124,13 +127,13 @@ export default {
 </script>
 
 <style>
-.drop-down-container {
+.show-status-selector-container {
   position: relative;
   background: var(--background-primary);
   width: 150px;
   cursor: pointer;
 }
-.option-selected {
+.show-status-selector-option-selected {
   color: white;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -139,7 +142,7 @@ export default {
   align-items: center;
   padding: 0.5vmin;
 }
-.option-container {
+.show-status-selector-options-container {
   width: inherit;
   position: absolute;
   z-index: 1;
@@ -147,10 +150,10 @@ export default {
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
-.options {
+.show-status-selector-option {
   padding: 1.5vmin 0 0 1.5vmin;
 }
-.options:hover {
+.show-status-selector-option:hover {
   background: var(--background-primary);
 }
 </style>

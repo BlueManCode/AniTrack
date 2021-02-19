@@ -1,8 +1,8 @@
 <template>
-  <div class="interaction-search-container">
+  <div class="home-profile-container">
     <form>
       <label>Profile Option</label>
-      <div @click="toggle_option_container" class="profile-selector">
+      <div @click="toggle_option_container" class="home-profile-selector">
         <div
           :style="{
             padding: '0 0 0 2vmin',
@@ -10,15 +10,14 @@
         >
           {{ option_selected.name }}
         </div>
-        <div v-if="is_container_open" class="options-container">
-          <div
-            class="profile-selector-options"
-            v-for="(option, index) in options"
-            :key="index"
-          >
+        <div
+          v-if="is_container_open"
+          class="home-profile-selector-options-container"
+        >
+          <div v-for="(option, index) in options" :key="index">
             <div
               @click="handle_option_selected(option.name)"
-              class="profile-selector-option"
+              class="home-profile-selector-option"
               v-if="option.name != option_selected.name"
             >
               {{ option.name }}
@@ -29,9 +28,9 @@
     </form>
     <button @click="handle_interaction_toggle">Search</button>
   </div>
-  <div class="profiles-container">
+  <!-- <div class="profiles-container">
     <Watching />
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -114,7 +113,7 @@ export default {
 </script>
 
 <style scoped>
-.interaction-search-container {
+.home-profile-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -136,7 +135,7 @@ label {
   margin-top: 2vmin;
 }
 
-.profile-selector {
+.home-profile-selector {
   width: 100%;
   height: 6vmin;
   background: var(--background-secondary);
@@ -154,7 +153,7 @@ label {
   cursor: pointer;
 }
 
-.options-container {
+.home-profile-selector-options-container {
   width: inherit;
   position: absolute;
   top: 6.5vmin;
@@ -163,11 +162,11 @@ label {
   background: var(--background-secondary);
 }
 
-.profile-selector-option {
+.home-profile-selector-option {
   padding: 2vmin;
 }
 
-.profile-selector-option:hover {
+.home-profile-selector-option:hover {
   background: var(--background-primary);
 }
 

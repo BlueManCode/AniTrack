@@ -1,10 +1,10 @@
 <template>
   <div class="season-container">
     <HeaderPopularSeasons />
-    <div class="trending-container">
-      <div class="trending-options">
+    <div class="season-body-container">
+      <div class="season-shows-container">
         <div v-for="(show, index) in results" :key="index">
-          <TrendingCard :data="show" :index="index" />
+          <PopularShowCard :data="show" :index="index" />
         </div>
       </div>
     </div>
@@ -18,11 +18,11 @@ import { ref, onMounted } from "vue";
 // components
 import fetch_shows_trending from "../lib/fetch_shows_trending";
 import HeaderPopularSeasons from "../components/HeaderPopularSeasons";
-import TrendingCard from "../components/TrendingCard";
+import PopularShowCard from "../components/PopularShowCard";
 
 export default {
   name: "Summer",
-  components: { HeaderPopularSeasons, TrendingCard },
+  components: { HeaderPopularSeasons, PopularShowCard },
   setup() {
     // check if cache data exist
     const results = ref([]);
@@ -46,13 +46,13 @@ export default {
   background: var(--background-primary);
 }
 
-.trending-container {
+.season-body-container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.trending-options {
+.season-shows-container {
   width: 90%;
   display: grid;
   z-index: 1;

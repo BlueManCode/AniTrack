@@ -2,7 +2,7 @@
   <div>
     <HeaderHome />
     <div class="home-container">
-      <div class="container-content">
+      <div class="home-content">
         <div v-if="is_show_profile">
           <HomeProfile />
         </div>
@@ -23,13 +23,11 @@ import { useStore } from "vuex";
 import HeaderHome from ".././components/HeaderHome";
 import HomeSearch from ".././components/HomeSearch";
 import HomeProfile from "../components/HomeProfile";
-import SearchCard from ".././components/SearchCard";
 
 export default {
   components: {
     HeaderHome,
     HomeSearch,
-    SearchCard,
     HomeProfile,
   },
   setup() {
@@ -51,12 +49,8 @@ export default {
   background: var(--background-primary);
 }
 
-.container-content {
+.home-content {
   width: 70%;
   height: 100%;
-}
-
-.card-container {
-  width: 100%;
 }
 </style>

@@ -1,17 +1,21 @@
 <template>
-  <div class="interaction-search-container">
+  <div class="home-search-container">
     <form @submit.prevent="handle_fetch">
       <label>Search</label>
       <input v-model="search_term" class="input-bar" />
     </form>
     <button @click="handle_interaction_toggle">Profile</button>
   </div>
-  <div class="label-search" v-if="search_results.length !== 0">
+  <div class="home-search-input-label" v-if="search_results.length !== 0">
     Search Results
   </div>
-  <div class="card-container" v-for="show in search_results" :key="show.id">
+  <div
+    class="home-search-results-container"
+    v-for="show in search_results"
+    :key="show.id"
+  >
     <div v-if="show.title.english">
-      <SearchCard :data="show" />
+      <SearchShowCard :data="show" />
     </div>
   </div>
 </template>
@@ -25,11 +29,11 @@ import { useStore } from "vuex";
 import fetch_api from "../lib/fetch_api";
 
 // components
-import SearchCard from "../components/SearchCard";
+import SearchShowCard from "../components/SearchShowCard";
 
 export default {
   name: "HomeSearch",
-  components: { SearchCard },
+  components: { SearchShowCard },
   setup() {
     const search_term = ref("");
     const search_results = ref([]);
@@ -64,7 +68,7 @@ export default {
 </script>
 
 <style>
-.interaction-search-container {
+.home-search-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -125,11 +129,11 @@ button svg {
   margin: 0;
 }
 
-.card-container {
+.home-search-results-container {
   width: 100%;
 }
 
-.label-search {
+.home-search-input-label {
   font-size: xx-large;
   font-weight: bolder;
   font-family: "Overpass", sans-serif;
