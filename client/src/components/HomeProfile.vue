@@ -35,13 +35,15 @@
 </template>
 
 <script>
+// vue functions
 import { ref } from "vue";
 import { useStore } from "vuex";
 
+// components
 import Watching from "../components/Watching";
 
 export default {
-  name: "InteractionProfile",
+  name: "HomeProfile",
   components: { Watching },
   setup() {
     const options = ref({

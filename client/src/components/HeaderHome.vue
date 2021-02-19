@@ -56,9 +56,11 @@
 </template>
 
 <script>
+// vue functions
 import { ref } from "vue";
+
 export default {
-  name: "HeaderSmall",
+  name: "HeaderHome",
   setup() {
     const year = ref(new Date().getFullYear());
     return {

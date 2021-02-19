@@ -27,10 +27,14 @@
 </template>
 
 <script>
+// vue functions
 import { ref } from "vue";
+
+// components
 import ShowDropDown from "../components/ShowDropDown";
+
 export default {
-  name: "MyShowCard",
+  name: "SearchCard",
   props: ["data"],
   components: {
     ShowDropDown,

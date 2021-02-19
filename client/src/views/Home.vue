@@ -1,13 +1,13 @@
 <template>
   <div>
-    <HeaderSmall />
+    <HeaderHome />
     <div class="home-container">
       <div class="container-content">
         <div v-if="is_show_profile">
-          <InteractionProfile />
+          <HomeProfile />
         </div>
         <div v-else>
-          <InteractionSearch />
+          <HomeSearch />
         </div>
       </div>
     </div>
@@ -15,20 +15,22 @@
 </template>
 
 <script>
+// vue functions
 import { computed } from "vue";
 import { useStore } from "vuex";
 
-import HeaderSmall from ".././components/HeaderSmall";
-import InteractionSearch from ".././components/InteractionSearch";
-import InteractionProfile from "../components/InteractionProfile";
-import MyShowCard from ".././components/MyShowCard";
+// components
+import HeaderHome from ".././components/HeaderHome";
+import HomeSearch from ".././components/HomeSearch";
+import HomeProfile from "../components/HomeProfile";
+import SearchCard from ".././components/SearchCard";
 
 export default {
   components: {
-    HeaderSmall,
-    InteractionSearch,
-    MyShowCard,
-    InteractionProfile,
+    HeaderHome,
+    HomeSearch,
+    SearchCard,
+    HomeProfile,
   },
   setup() {
     const store = useStore();

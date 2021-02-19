@@ -1,18 +1,20 @@
 <template>
   <div>Watching</div>
   <div v-for="(show, index) in shows" :key="index">
-    <MyShowCard :data="show" />
+    <SearchCard :data="show" />
   </div>
 </template>
 
 <script>
+// vue functions
 import { ref } from "vue";
 
-import MyShowCard from "../components/MyShowCard";
+// components
+import SearchCard from "../components/SearchCard";
 
 export default {
   name: "Watching",
-  components: { MyShowCard },
+  components: { SearchCard },
   setup() {
     const shows = ref([]);
     return {

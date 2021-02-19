@@ -22,7 +22,9 @@
 </template>
 
 <script>
+// vue components
 import { ref, onMounted } from "vue";
+
 export default {
   name: "ShowDropDown",
   props: ["data", "handle_add_show", "isAdded"],

@@ -44,8 +44,10 @@
 </template>
 
 <script>
+// vue functions
 import { onMounted, ref } from "vue";
 
+// custom functions
 import {
   convert_next_airing,
   convert_end_date,

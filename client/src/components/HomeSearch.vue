@@ -11,22 +11,25 @@
   </div>
   <div class="card-container" v-for="show in search_results" :key="show.id">
     <div v-if="show.title.english">
-      <MyShowCard :data="show" />
+      <SearchCard :data="show" />
     </div>
   </div>
 </template>
 
 <script>
+// vue functions
 import { ref, watch } from "vue";
 import { useStore } from "vuex";
 
+// custom functions
 import fetch_api from "../lib/fetch_api";
 
-import MyShowCard from "../components/MyShowCard";
+// components
+import SearchCard from "../components/SearchCard";
 
 export default {
-  name: "InteractionSearch",
-  components: { MyShowCard },
+  name: "HomeSearch",
+  components: { SearchCard },
   setup() {
     const search_term = ref("");
     const search_results = ref([]);

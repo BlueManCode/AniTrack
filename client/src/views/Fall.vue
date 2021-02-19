@@ -1,6 +1,6 @@
 <template>
   <div class="season-container">
-    <HeaderLarge />
+    <HeaderPopularSeasons />
     <div class="trending-container">
       <div class="trending-options">
         <div v-for="(show, index) in results" :key="index">
@@ -12,15 +12,17 @@
 </template>
 
 <script>
+// vue functions
 import { ref, onMounted } from "vue";
 
+// components
 import fetch_shows_trending from "../lib/fetch_shows_trending";
-import HeaderLarge from "../components/HeaderLarge";
+import HeaderPopularSeasons from "../components/HeaderPopularSeasons";
 import TrendingCard from "../components/TrendingCard";
 
 export default {
   name: "Fall",
-  components: { HeaderLarge, TrendingCard },
+  components: { HeaderPopularSeasons, TrendingCard },
   setup() {
     // check if cache data exist
     const results = ref([]);
