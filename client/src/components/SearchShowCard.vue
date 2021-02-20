@@ -59,9 +59,12 @@ export default {
 
       // if added
       if (isAdded.value) {
-        let user_show_data = props.data;
-        user_show_data.user_show_data.status = "watching";
-        ls.push(user_show_data);
+        let show_data = props.data;
+        let user_show_data = {
+          status: "watching",
+        };
+        show_data.user_show_data = user_show_data;
+        ls.push(show_data);
         localStorage.setItem("added_shows", JSON.stringify(ls));
       }
       // not added
@@ -102,7 +105,7 @@ export default {
   font-size: bolder;
 }
 
-.card-search img {
+.search-card-container img {
   width: auto;
   height: 100%;
   border-radius: 6px 0 0 6px;

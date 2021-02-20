@@ -1,7 +1,10 @@
 <template>
-  <div>Watching</div>
+  <div class="home-profile-watching-title">Watching</div>
   <div v-for="(show, index) in shows" :key="index">
-    <SearchShowCard :data="show" />
+    <SearchShowCard
+      :data="show"
+      v-if="show.user_show_data.status === 'watching'"
+    />
   </div>
 </template>
 
@@ -13,7 +16,7 @@ import { ref } from "vue";
 import SearchShowCard from "../components/SearchShowCard";
 
 export default {
-  name: "Watching",
+  name: "HomeProfileWatching",
   components: { SearchShowCard },
   setup() {
     const shows = ref([]);
@@ -29,4 +32,9 @@ export default {
 </script>
 
 <style>
+.home-profile-watching-title {
+  color: var(--text-color);
+  font-size: 5vmin;
+  opacity: 80%;
+}
 </style>

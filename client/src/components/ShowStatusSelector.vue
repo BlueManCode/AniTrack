@@ -8,8 +8,8 @@
       {{ option_selected.name }}
     </div>
     <div
-      v-if="is_container_open"
       class="show-status-selector-options-container"
+      v-if="is_container_open"
     >
       <div v-for="(option, index) in options" :key="index">
         <div
@@ -113,6 +113,27 @@ export default {
 
     onMounted(() => {
       handle_option_selected(props.data.user_show_data.status);
+      const status_selector_ref = document.querySelector(
+        ".show-status-selector-option-selected"
+      );
+
+      status_selector_ref.addEventListener("mouseenter", () => {
+        is_container_open.value = true;
+
+        setTimeout(() => {
+          const selector_options_ref = document.querySelector(
+            ".show-status-selector-options-container"
+          );
+
+          selector_options_ref.addEventListener("mouseenter", () => {
+            is_container_open.value = true;
+          });
+
+          selector_options_ref.addEventListener("mouseleave", () => {
+            is_container_open.value = false;
+          });
+        }, 0);
+      });
     });
 
     return {

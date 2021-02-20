@@ -84,7 +84,7 @@ form {
 }
 
 label {
-  font-size: 2.5vmin;
+  font-size: 2vmin;
   font-weight: bolder;
   opacity: 70%;
   margin-top: 2vmin;
