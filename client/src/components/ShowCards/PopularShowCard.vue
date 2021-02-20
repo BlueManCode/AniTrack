@@ -57,7 +57,7 @@ import { onMounted, ref } from "vue";
 import {
   convert_next_airing,
   convert_end_date,
-} from "../lib/fetch_shows_trending";
+} from "../../lib/fetch_shows_trending";
 
 export default {
   name: "PopularShowCard",

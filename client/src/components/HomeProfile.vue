@@ -49,11 +49,11 @@ import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 
 // components
-import HomeProfileWatching from "../components/HomeProfileWatching";
-import HomeProfileOnHold from "../components/HomeProfileOnHold";
-import HomeProfileDropped from "../components/HomeProfileDropped";
-import HomeProfilePlanToWatch from "../components/HomeProfilePlanToWatch";
-import HomeProfileCompleted from "../components/HomeProfileCompleted";
+import HomeProfileWatching from "../components/HomeProfileStatus/HomeProfileWatching";
+import HomeProfileOnHold from "../components/HomeProfileStatus/HomeProfileOnHold";
+import HomeProfileDropped from "../components/HomeProfileStatus/HomeProfileDropped";
+import HomeProfilePlanToWatch from "../components/HomeProfileStatus/HomeProfilePlanToWatch";
+import HomeProfileCompleted from "../components/HomeProfileStatus/HomeProfileCompleted";
 
 export default {
   name: "HomeProfile",

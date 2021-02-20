@@ -18,7 +18,7 @@ import { ref, onMounted } from "vue";
 // components
 import fetch_shows_trending from "../lib/fetch_shows_trending";
 import HeaderPopularSeasons from "../components/HeaderPopularSeasons";
-import PopularShowCard from "../components/PopularShowCard";
+import PopularShowCard from "../components/ShowCards/PopularShowCard";
 
 export default {
   name: "Summer",

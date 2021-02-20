@@ -29,7 +29,7 @@ import { useStore } from "vuex";
 import fetch_api from "../lib/fetch_api";
 
 // components
-import SearchShowCard from "../components/SearchShowCard";
+import SearchShowCard from "../components/ShowCards/SearchShowCard";
 
 export default {
   name: "HomeSearch",

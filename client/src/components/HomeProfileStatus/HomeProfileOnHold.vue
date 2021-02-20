@@ -1,9 +1,9 @@
 <template>
-  <div class="home-profile-dropped">Dropped</div>
+  <div class="home-profile-on-hold">On Hold</div>
   <div v-for="(show, index) in shows" :key="index">
     <SearchShowCard
       :data="show"
-      v-if="show.user_show_data.status === 'dropped'"
+      v-if="show.user_show_data.status === 'on hold'"
     />
   </div>
 </template>
@@ -13,10 +13,10 @@
 import { ref } from "vue";
 
 // components
-import SearchShowCard from "../components/SearchShowCard";
+import SearchShowCard from "../ShowCards/SearchShowCard";
 
 export default {
-  name: "HomeProfileDropped",
+  name: "HomeProfileOnHold",
   components: { SearchShowCard },
   setup() {
     const shows = ref([]);
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style>
-.home-profile-dropped {
+.home-profile-on-hold {
   color: var(--text-color);
   font-size: 5vmin;
   opacity: 80%;

@@ -35,7 +35,7 @@
 import { ref } from "vue";
 
 // components
-import ShowStatusSelector from "../components/ShowStatusSelector";
+import ShowStatusSelector from "../Selector/ShowStatusSelector";
 
 export default {
   name: "SearchShowCard",

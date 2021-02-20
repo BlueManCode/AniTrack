@@ -13,7 +13,7 @@
 import { ref } from "vue";
 
 // components
-import SearchShowCard from "../components/SearchShowCard";
+import SearchShowCard from "../ShowCards/SearchShowCard";
 
 export default {
   name: "HomeProfileCompleted",
