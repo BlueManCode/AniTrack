@@ -20,7 +20,7 @@
         Add
       </div>
       <div v-else>
-        <ShowStatusSelector
+        <SearchShowStatusSelector
           :data="show_data"
           :handle_add_show="handle_add_show"
           :isAdded="isAdded"
@@ -35,13 +35,13 @@
 import { ref } from "vue";
 
 // components
-import ShowStatusSelector from "../Selector/ShowStatusSelector";
+import SearchShowStatusSelector from "../Selector/SearchShowStatusSelector";
 
 export default {
   name: "SearchShowCard",
   props: ["data"],
   components: {
-    ShowStatusSelector,
+    SearchShowStatusSelector,
   },
   setup(props) {
     const isAdded = ref(false);

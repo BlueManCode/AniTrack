@@ -1,7 +1,7 @@
 <template>
   <div class="home-profile-plan-to-watch">Plan to Watch</div>
   <div v-for="(show, index) in shows" :key="index">
-    <SearchShowCard
+    <PlanToWatchShowCard
       :data="show"
       v-if="show.user_show_data.status === 'plan to watch'"
     />
@@ -13,11 +13,10 @@
 import { ref } from "vue";
 
 // components
-import SearchShowCard from "../ShowCards/SearchShowCard";
-
+import PlanToWatchShowCard from "../ShowCards/PlanToWatchShowCard";
 export default {
   name: "HomeProfilePlanToWatch",
-  components: { SearchShowCard },
+  components: { PlanToWatchShowCard },
   setup() {
     const shows = ref([]);
     return {

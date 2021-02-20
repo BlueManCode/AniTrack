@@ -1,7 +1,7 @@
 <template>
   <div class="home-profile-on-hold">On Hold</div>
   <div v-for="(show, index) in shows" :key="index">
-    <SearchShowCard
+    <OnHoldShowCard
       :data="show"
       v-if="show.user_show_data.status === 'on hold'"
     />
@@ -13,11 +13,11 @@
 import { ref } from "vue";
 
 // components
-import SearchShowCard from "../ShowCards/SearchShowCard";
+import OnHoldShowCard from "../ShowCards/OnHoldShowCard";
 
 export default {
   name: "HomeProfileOnHold",
-  components: { SearchShowCard },
+  components: { OnHoldShowCard },
   setup() {
     const shows = ref([]);
     return {

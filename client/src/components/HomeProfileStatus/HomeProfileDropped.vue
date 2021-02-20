@@ -1,7 +1,7 @@
 <template>
   <div class="home-profile-dropped">Dropped</div>
   <div v-for="(show, index) in shows" :key="index">
-    <SearchShowCard
+    <DroppedShowCard
       :data="show"
       v-if="show.user_show_data.status === 'dropped'"
     />
@@ -13,11 +13,10 @@
 import { ref } from "vue";
 
 // components
-import SearchShowCard from "../ShowCards/SearchShowCard";
-
+import DroppedShowCard from "../ShowCards/DroppedShowCard";
 export default {
   name: "HomeProfileDropped",
-  components: { SearchShowCard },
+  components: { DroppedShowCard },
   setup() {
     const shows = ref([]);
     return {

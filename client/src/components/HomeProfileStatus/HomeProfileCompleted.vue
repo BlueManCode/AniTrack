@@ -1,7 +1,7 @@
 <template>
   <div class="home-profile-completed">Completed</div>
   <div v-for="(show, index) in shows" :key="index">
-    <SearchShowCard
+    <CompletedShowCard
       :data="show"
       v-if="show.user_show_data.status === 'completed'"
     />
@@ -13,11 +13,10 @@
 import { ref } from "vue";
 
 // components
-import SearchShowCard from "../ShowCards/SearchShowCard";
-
+import CompletedShowCard from "../ShowCards/CompletedShowCard";
 export default {
   name: "HomeProfileCompleted",
-  components: { SearchShowCard },
+  components: { CompletedShowCard },
   setup() {
     const shows = ref([]);
     return {

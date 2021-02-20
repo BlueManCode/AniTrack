@@ -1,11 +1,11 @@
 <template>
-  <div v-if="!is_property_changed" class="on-hold-card-container">
+  <div v-if="!is_property_changed" class="completed-card-container">
     <img :src="data.coverImage.large || data.coverImage.medium" />
-    <div class="on-hold-card-data-container">
-      <div class="on-hold-card-data-title">
+    <div class="completed-card-data-container">
+      <div class="completed-card-data-title">
         {{ data.title.english || "title not found" }}
       </div>
-      <div class="on-hold-card-sub-data-container">
+      <div class="completed-card-sub-data-container">
         <div>
           {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
         </div>
@@ -31,7 +31,7 @@ import { ref } from "vue";
 import ProfileShowStatusSelector from "../Selector/ProfileShowStatusSelector";
 
 export default {
-  name: "OnHoldShowCard",
+  name: "CompletedShowCard",
   props: ["data"],
   components: {
     ProfileShowStatusSelector,
@@ -40,7 +40,6 @@ export default {
     const show_data = ref(props.data);
     const is_property_changed = ref(false);
     const current_status = ref(props.data.user_show_data.status);
-
     function handle_property_changed() {
       is_property_changed.value = !is_property_changed.value;
     }
@@ -56,7 +55,7 @@ export default {
 </script>
 
 <style scoped>
-.on-hold-card-container {
+.completed-card-container {
   width: 100%;
   height: 20vmin;
   background: var(--background-secondary);
@@ -68,13 +67,13 @@ export default {
   font-size: bolder;
 }
 
-.on-hold-card-container img {
+.completed-card-container img {
   width: auto;
   height: 100%;
   border-radius: 6px 0 0 6px;
 }
 
-.on-hold-card-data-container {
+.completed-card-data-container {
   font-family: "Overpass", sans-serif;
   padding: 1vmin 0 1vmin 5vmin;
   display: flex;
@@ -82,7 +81,7 @@ export default {
   justify-content: center;
 }
 
-.on-hold-card-data-title {
+.completed-card-data-title {
   width: 54vmin;
   font-size: 3vmin;
   opacity: 90%;
@@ -91,7 +90,7 @@ export default {
   white-space: nowrap;
 }
 
-.on-hold-card-sub-data-container {
+.completed-card-sub-data-container {
   font-size: 1.8vmin;
   opacity: 60%;
   padding: 1vmin 0 2vmin 0;
