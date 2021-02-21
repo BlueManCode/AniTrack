@@ -110,11 +110,6 @@ export default {
     function toggle_container() {
       is_container_open.value = !is_container_open.value;
     }
-
-    onMounted(() => {
-      handle_option_selected(props.data.user_show_data.status);
-    });
-
     return {
       options,
       option_selected,

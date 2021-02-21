@@ -14,7 +14,7 @@
     v-for="show in search_results"
     :key="show.id"
   >
-    <div v-if="show.title.english">
+    <div v-if="show.title.english || show.title.romaji">
       <SearchShowCard :data="show" />
     </div>
   </div>
@@ -48,7 +48,6 @@ export default {
         search_term: search_term.value,
       });
       search_results.value = data.data.Page.media;
-      console.log(search_results._rawValue);
     }
 
     watch(search_term, (new_value) => {

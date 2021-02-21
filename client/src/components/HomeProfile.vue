@@ -125,23 +125,23 @@ export default {
         ".home-profile-selector"
       );
 
-      profile_selector_ref.addEventListener("mouseenter", () => {
-        is_container_open.value = true;
+      // profile_selector_ref.addEventListener("mouseenter", () => {
+      //   is_container_open.value = true;
 
-        setTimeout(() => {
-          const profile_selector_options_ref = document.querySelector(
-            ".home-profile-selector-options-container"
-          );
+      // setTimeout(() => {
+      //   const profile_selector_options_ref = document.querySelector(
+      //     ".home-profile-selector-options-container"
+      //   );
 
-          profile_selector_options_ref.addEventListener("mouseenter", () => {
-            is_container_open.value = true;
-          });
+      //   profile_selector_options_ref.addEventListener("mouseenter", () => {
+      //     is_container_open.value = true;
+      //   });
 
-          profile_selector_options_ref.addEventListener("mouseleave", () => {
-            is_container_open.value = false;
-          });
-        }, 0);
-      });
+      //   profile_selector_options_ref.addEventListener("mouseleave", () => {
+      //     is_container_open.value = false;
+      //   });
+      // }, 0);
+      // });
     });
 
     return {

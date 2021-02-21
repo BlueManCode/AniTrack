@@ -91,6 +91,7 @@ export default {
         case "clear":
           const filter = ls.filter((item) => item.id !== props.data.id);
           localStorage.setItem("added_shows", JSON.stringify(filter));
+          props.handle_property_changed();
           is_container_open.value = false;
           break;
       }

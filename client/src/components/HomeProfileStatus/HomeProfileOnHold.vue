@@ -1,10 +1,22 @@
 <template>
-  <div class="home-profile-on-hold">On Hold</div>
-  <div v-for="(show, index) in shows" :key="index">
-    <OnHoldShowCard
-      :data="show"
-      v-if="show.user_show_data.status === 'on hold'"
-    />
+  <div class="home-profile-on-hold-title">On Hold</div>
+  <div v-if="shows.length > 0">
+    <div v-for="(show, index) in shows" :key="index">
+      <OnHoldShowCard :data="show" />
+    </div>
+  </div>
+  <div
+    v-else
+    :style="{
+      color: 'var(--text-color)',
+      display: 'flex',
+      justifyContent: 'center',
+      paddingTop: '5vmin',
+      opacity: '70%',
+      fontStyle: 'italic',
+    }"
+  >
+    No Shows in this Domain
   </div>
 </template>
 
@@ -16,7 +28,7 @@ import { ref } from "vue";
 import OnHoldShowCard from "../ShowCards/OnHoldShowCard";
 
 export default {
-  name: "HomeProfileOnHold",
+  name: "HomeProfileWatching",
   components: { OnHoldShowCard },
   setup() {
     const shows = ref([]);
@@ -26,13 +38,19 @@ export default {
   },
   mounted() {
     const ls = JSON.parse(localStorage.getItem("added_shows"));
-    this.shows = ls;
+    const arr = [];
+    ls.forEach((element, index) => {
+      if (element.user_show_data.status === "on hold") {
+        arr.push(ls[index]);
+      }
+    });
+    this.shows = arr;
   },
 };
 </script>
 
 <style>
-.home-profile-on-hold {
+.home-profile-on-hold-title {
   color: var(--text-color);
   font-size: 5vmin;
   opacity: 80%;

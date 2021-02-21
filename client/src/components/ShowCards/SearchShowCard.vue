@@ -3,7 +3,7 @@
     <img :src="data.coverImage.large || data.coverImage.medium" />
     <div class="search-card-data-container">
       <div class="search-card-data-title">
-        {{ data.title.english || "title not found" }}
+        {{ data.title.english || data.title.romaji || "title not found" }}
       </div>
       <div class="search-card-sub-data-container">
         <div>
@@ -59,12 +59,12 @@ export default {
 
       // if added
       if (isAdded.value) {
-        let show_data = props.data;
+        let show_data_temp = props.data;
         let user_show_data = {
           status: "watching",
         };
-        show_data.user_show_data = user_show_data;
-        ls.push(show_data);
+        show_data_temp.user_show_data = user_show_data;
+        ls.push(show_data_temp);
         localStorage.setItem("added_shows", JSON.stringify(ls));
       }
       // not added

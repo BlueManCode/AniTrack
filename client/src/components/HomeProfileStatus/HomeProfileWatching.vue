@@ -1,10 +1,22 @@
 <template>
   <div class="home-profile-watching-title">Watching</div>
-  <div v-for="(show, index) in shows" :key="index">
-    <WatchingShowCard
-      :data="show"
-      v-if="show.user_show_data.status === 'watching'"
-    />
+  <div v-if="shows.length > 0">
+    <div v-for="(show, index) in shows" :key="index">
+      <WatchingShowCard :data="show" />
+    </div>
+  </div>
+  <div
+    :style="{
+      color: 'var(--text-color)',
+      display: 'flex',
+      justifyContent: 'center',
+      paddingTop: '5vmin',
+      opacity: '70%',
+      fontStyle: 'italic',
+    }"
+    v-else
+  >
+    No Shows in this Domain
   </div>
 </template>
 
@@ -26,7 +38,13 @@ export default {
   },
   mounted() {
     const ls = JSON.parse(localStorage.getItem("added_shows"));
-    this.shows = ls;
+    const arr = [];
+    ls.forEach((element, index) => {
+      if (element.user_show_data.status === "watching") {
+        arr.push(ls[index]);
+      }
+    });
+    this.shows = arr;
   },
 };
 </script>

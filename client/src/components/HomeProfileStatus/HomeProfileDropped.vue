@@ -1,10 +1,22 @@
 <template>
-  <div class="home-profile-dropped">Dropped</div>
-  <div v-for="(show, index) in shows" :key="index">
-    <DroppedShowCard
-      :data="show"
-      v-if="show.user_show_data.status === 'dropped'"
-    />
+  <div class="home-profile-on-hold-title">Dropped</div>
+  <div v-if="shows.length > 0">
+    <div v-for="(show, index) in shows" :key="index">
+      <DroppedShowCard :data="show" />
+    </div>
+  </div>
+  <div
+    v-else
+    :style="{
+      color: 'var(--text-color)',
+      display: 'flex',
+      justifyContent: 'center',
+      paddingTop: '5vmin',
+      opacity: '70%',
+      fontStyle: 'italic',
+    }"
+  >
+    No Shows in this Domain
   </div>
 </template>
 
@@ -14,8 +26,9 @@ import { ref } from "vue";
 
 // components
 import DroppedShowCard from "../ShowCards/DroppedShowCard";
+
 export default {
-  name: "HomeProfileDropped",
+  name: "HomeProfileWatching",
   components: { DroppedShowCard },
   setup() {
     const shows = ref([]);
@@ -25,13 +38,19 @@ export default {
   },
   mounted() {
     const ls = JSON.parse(localStorage.getItem("added_shows"));
-    this.shows = ls;
+    const arr = [];
+    ls.forEach((element, index) => {
+      if (element.user_show_data.status === "dropped") {
+        arr.push(ls[index]);
+      }
+    });
+    this.shows = arr;
   },
 };
 </script>
 
 <style>
-.home-profile-dropped {
+.home-profile-on-hold-title {
   color: var(--text-color);
   font-size: 5vmin;
   opacity: 80%;
