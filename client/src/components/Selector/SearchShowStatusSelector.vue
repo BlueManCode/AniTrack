@@ -130,7 +130,7 @@ export default {
 }
 .show-status-selector-option-selected {
   color: white;
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2); */
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -142,7 +142,7 @@ export default {
   position: absolute;
   z-index: 1;
   background: var(--background-secondary);
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
 .show-status-selector-option {

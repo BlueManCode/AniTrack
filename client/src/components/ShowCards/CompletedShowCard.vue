@@ -5,13 +5,15 @@
       <div class="completed-card-data-title">
         {{ data.title.english || "title not found" }}
       </div>
-      <div class="completed-card-sub-data-container">
-        <div>
-          {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
-        </div>
-        <div>{{ "Episodes:  " + data.episodes }}</div>
-        <div>{{ "Status:  " + data.status.toLowerCase() }}</div>
+      <div :style="{ opacity: '60%' }">
+        {{
+          data.season[0] +
+          data.season.slice(1).toLowerCase() +
+          " " +
+          data.seasonYear
+        }}
       </div>
+      <Rating :data="data" />
       <div>
         <ProfileShowStatusSelector
           :data="show_data"
@@ -19,6 +21,17 @@
           :current_status="current_status"
         />
       </div>
+    </div>
+    <div
+      :style="{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        paddingRight: '4vmin',
+      }"
+    >
+      <EpisodeCounter :data="data" />
     </div>
   </div>
 </template>
@@ -29,12 +42,16 @@ import { ref } from "vue";
 
 // components
 import ProfileShowStatusSelector from "../Selector/ProfileShowStatusSelector";
+import Rating from "../Rating";
+import EpisodeCounter from "../EpisodeCounter";
 
 export default {
   name: "CompletedShowCard",
   props: ["data"],
   components: {
     ProfileShowStatusSelector,
+    Rating,
+    EpisodeCounter,
   },
   setup(props) {
     const show_data = ref(props.data);
@@ -51,6 +68,16 @@ export default {
       handle_property_changed,
     };
   },
+  mounted() {
+    const ls = JSON.parse(localStorage.getItem("added_shows"));
+    ls.forEach((element, index) => {
+      if (element.id === this.data.id) {
+        ls[index].user_show_data.watched_episodes =
+          ls[index].user_show_data.total_episodes;
+        localStorage.setItem("added_shows", JSON.stringify(ls));
+      }
+    });
+  },
 };
 </script>
 
@@ -60,7 +87,7 @@ export default {
   height: 20vmin;
   background: var(--background-secondary);
   color: var(--text-color);
-  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   margin-top: 20px;
   display: flex;

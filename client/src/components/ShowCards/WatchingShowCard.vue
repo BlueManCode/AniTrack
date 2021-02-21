@@ -5,13 +5,15 @@
       <div class="watching-card-data-title">
         {{ data.title.english || "title not found" }}
       </div>
-      <div class="watching-card-sub-data-container">
-        <div>
-          {{ "Season:  " + data.season.toLowerCase() + " " + data.seasonYear }}
-        </div>
-        <div>{{ "Episodes:  " + data.episodes }}</div>
-        <div>{{ "Status:  " + data.status.toLowerCase() }}</div>
+      <div :style="{ opacity: '60%' }">
+        {{
+          data.season[0] +
+          data.season.slice(1).toLowerCase() +
+          " " +
+          data.seasonYear
+        }}
       </div>
+      <Rating :data="data" />
       <div>
         <ProfileShowStatusSelector
           :data="show_data"
@@ -19,6 +21,17 @@
           :current_status="current_status"
         />
       </div>
+    </div>
+    <div
+      :style="{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        paddingRight: '4vmin',
+      }"
+    >
+      <EpisodeCounter :data="data" />
     </div>
   </div>
 </template>
@@ -29,12 +42,16 @@ import { ref } from "vue";
 
 // components
 import ProfileShowStatusSelector from "../Selector/ProfileShowStatusSelector";
+import EpisodeCounter from "../EpisodeCounter";
+import Rating from "../Rating";
 
 export default {
   name: "SearchShowCard",
   props: ["data"],
   components: {
     ProfileShowStatusSelector,
+    EpisodeCounter,
+    Rating,
   },
   setup(props) {
     const show_data = ref(props.data);

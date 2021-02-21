@@ -120,26 +120,6 @@ export default {
       }
     }
 
-    onMounted(() => {
-      // const profile_selector_ref = document.querySelector(
-      //   ".home-profile-selector"
-      // );
-      // profile_selector_ref.addEventListener("mouseenter", () => {
-      //   is_container_open.value = true;
-      // setTimeout(() => {
-      //   const profile_selector_options_ref = document.querySelector(
-      //     ".home-profile-selector-options-container"
-      //   );
-      //   profile_selector_options_ref.addEventListener("mouseenter", () => {
-      //     is_container_open.value = true;
-      //   });
-      //   profile_selector_options_ref.addEventListener("mouseleave", () => {
-      //     is_container_open.value = false;
-      //   });
-      // }, 0);
-      // });
-    });
-
     return {
       options,
       option_selected,
@@ -153,6 +133,9 @@ export default {
 </script>
 
 <style scoped>
+body {
+  height: auto;
+}
 .home-profile-container {
   width: 100%;
   display: flex;

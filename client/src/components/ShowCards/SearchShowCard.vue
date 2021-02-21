@@ -62,6 +62,9 @@ export default {
         let show_data_temp = props.data;
         let user_show_data = {
           status: "watching",
+          watched_episodes: 0,
+          total_episodes: show_data_temp.episodes,
+          user_rating: null,
         };
         show_data_temp.user_show_data = user_show_data;
         ls.push(show_data_temp);

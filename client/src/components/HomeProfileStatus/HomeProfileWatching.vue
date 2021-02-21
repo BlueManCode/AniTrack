@@ -1,22 +1,24 @@
 <template>
-  <div class="home-profile-watching-title">Watching</div>
-  <div v-if="shows.length > 0">
-    <div v-for="(show, index) in shows" :key="index">
-      <WatchingShowCard :data="show" />
+  <div class="home-profile-watching-container">
+    <div class="home-profile-watching-title">Watching ({{ shows.length }})</div>
+    <div v-if="shows.length > 0">
+      <div v-for="(show, index) in shows" :key="index">
+        <WatchingShowCard :data="show" />
+      </div>
     </div>
-  </div>
-  <div
-    :style="{
-      color: 'var(--text-color)',
-      display: 'flex',
-      justifyContent: 'center',
-      paddingTop: '5vmin',
-      opacity: '70%',
-      fontStyle: 'italic',
-    }"
-    v-else
-  >
-    No Shows in this Domain
+    <div
+      :style="{
+        color: 'var(--text-color)',
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: '5vmin',
+        opacity: '70%',
+        fontStyle: 'italic',
+      }"
+      v-else
+    >
+      No Shows in this Domain
+    </div>
   </div>
 </template>
 
@@ -50,6 +52,10 @@ export default {
 </script>
 
 <style>
+.home-profile-watching-container {
+  height: auto;
+  margin-bottom: 27vmin;
+}
 .home-profile-watching-title {
   color: var(--text-color);
   font-size: 5vmin;

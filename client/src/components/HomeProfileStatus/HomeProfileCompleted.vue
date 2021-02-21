@@ -1,22 +1,26 @@
 <template>
-  <div class="home-profile-completed-title">Completed</div>
-  <div v-if="shows.length > 0">
-    <div v-for="(show, index) in shows" :key="index">
-      <CompletedShowCard :data="show" />
+  <div class="home-profile-completed-container">
+    <div class="home-profile-completed-title">
+      Completed ({{ shows.length }})
     </div>
-  </div>
-  <div
-    v-else
-    :style="{
-      color: 'var(--text-color)',
-      display: 'flex',
-      justifyContent: 'center',
-      paddingTop: '5vmin',
-      opacity: '70%',
-      fontStyle: 'italic',
-    }"
-  >
-    No Shows in this Domain
+    <div v-if="shows.length > 0">
+      <div v-for="(show, index) in shows" :key="index">
+        <CompletedShowCard :data="show" />
+      </div>
+    </div>
+    <div
+      v-else
+      :style="{
+        color: 'var(--text-color)',
+        display: 'flex',
+        justifyContent: 'center',
+        paddingTop: '5vmin',
+        opacity: '70%',
+        fontStyle: 'italic',
+      }"
+    >
+      No Shows in this Domain
+    </div>
   </div>
 </template>
 
@@ -50,6 +54,10 @@ export default {
 </script>
 
 <style>
+.home-profile-completed-container {
+  height: auto;
+  margin-bottom: 27vmin;
+}
 .home-profile-completed-title {
   color: var(--text-color);
   font-size: 5vmin;
