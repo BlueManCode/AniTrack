@@ -17,7 +17,7 @@
       }"
       v-else
     >
-      No Shows in this Domain test
+      No Shows in this Domain
     </div>
   </div>
 </template>
