@@ -11,3 +11,9 @@
 - [ ] show added show with upcoming episodes
 - [ ] export show lists
 - [ ] add shows directly from the trending pages
+- [ ] add fluidity for mobile and half screens
+
+## Aplha 1.2.0 goals
+
+- [ ] tranfers fetch codebase to a backend and enable login
+- [ ] store data in the database instead of local storage
