@@ -5,7 +5,7 @@
       <div class="watching-card-data-title">
         {{ data.title.english || "title not found" }}
       </div>
-      <div :style="{ opacity: '60%' }">
+      <div :style="{ opacity: '0.6' }">
         {{
           data.season[0] +
           data.season.slice(1).toLowerCase() +
@@ -101,7 +101,7 @@ export default {
 .watching-card-data-title {
   width: 54vmin;
   font-size: 3vmin;
-  opacity: 90%;
+  opacity: 0.9;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -109,7 +109,7 @@ export default {
 
 .watching-card-sub-data-container {
   font-size: 1.8vmin;
-  opacity: 60%;
+  opacity: 0.6;
   padding: 1vmin 0 2vmin 0;
 }
 </style>

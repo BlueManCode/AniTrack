@@ -112,7 +112,7 @@ img {
 }
 
 .popular-show-card-data-top {
-  opacity: 60%;
+  opacity: 0.6;
   font-weight: bold;
   font-size: 1.65vmin;
 }
@@ -120,11 +120,11 @@ img {
 .popular-show-card-data-middle {
   font-weight: bolder;
   font-size: 3.5vmin;
-  opacity: 90%;
+  opacity: 0.9;
 }
 
 .popular-show-card-data-bottom {
-  opacity: 60%;
+  opacity: 0.6;
   font-weight: bold;
   font-size: 1.65vmin;
 }
@@ -148,6 +148,6 @@ img {
 
 .popular-show-card-rank div {
   font-size: 4vmin;
-  opacity: 90%;
+  opacity: 0.9;
 }
 </style>

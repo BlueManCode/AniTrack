@@ -5,7 +5,7 @@
         <span
           class="header-home-option-title"
           :style="{
-            opacity: this.$route.path === '/' ? '100%' : '70%',
+            opacity: this.$route.path === '/' ? '1.0' : '0.7',
           }"
           >My Shows</span
         >
@@ -15,7 +15,7 @@
         <span
           class="header-home-option-title"
           :style="{
-            opacity: this.$route.path === '/winter' ? '100%' : '70%',
+            opacity: this.$route.path === '/winter' ? '1.0' : '0.7',
           }"
           >Winter</span
         >
@@ -25,7 +25,7 @@
         <span
           class="header-home-option-title"
           :style="{
-            opacity: this.$route.path === '/spring' ? '100%' : '70%',
+            opacity: this.$route.path === '/spring' ? '1.0' : '0.7',
           }"
           >Spring</span
         >
@@ -35,7 +35,7 @@
         <span
           class="header-home-option-title"
           :style="{
-            opacity: this.$route.path === '/summer' ? '100%' : '70%',
+            opacity: this.$route.path === '/summer' ? '1.0' : '0.7',
           }"
           >Summer</span
         >
@@ -45,7 +45,7 @@
         <span
           class="header-home-option-title"
           :style="{
-            opacity: this.$route.path === '/fall' ? '100%' : '70%',
+            opacity: this.$route.path === '/fall' ? '1.0' : '0.7',
           }"
           >Fall</span
         >
@@ -97,15 +97,15 @@ export default {
   font-size: x-large;
   font-weight: bold;
   letter-spacing: 1px;
-  opacity: 70%;
+  opacity: 0.7;
 }
 
 .header-home-option-title:hover {
-  opacity: 100%;
+  opacity: 1;
 }
 
 .header-home-option-year {
-  opacity: 50%;
+  opacity: 0.5;
   font-size: medium;
 }
 </style>

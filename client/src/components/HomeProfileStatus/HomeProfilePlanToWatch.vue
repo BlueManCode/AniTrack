@@ -15,7 +15,7 @@
         display: 'flex',
         justifyContent: 'center',
         paddingTop: '5vmin',
-        opacity: '70%',
+        opacity: '0.7',
         fontStyle: 'italic',
       }"
     >
@@ -61,6 +61,6 @@ export default {
 .home-profile-plan-to-watch-title {
   color: var(--text-color);
   font-size: 5vmin;
-  opacity: 80%;
+  opacity: 0.8;
 }
 </style>

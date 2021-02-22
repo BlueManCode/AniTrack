@@ -154,7 +154,7 @@ form {
 label {
   font-size: 2vmin;
   font-weight: bolder;
-  opacity: 70%;
+  opacity: 0.7;
   margin-top: 2vmin;
 }
 

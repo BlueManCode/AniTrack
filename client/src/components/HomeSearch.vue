@@ -85,7 +85,7 @@ form {
 label {
   font-size: 2vmin;
   font-weight: bolder;
-  opacity: 70%;
+  opacity: 0.7;
   margin-top: 2vmin;
 }
 
@@ -137,7 +137,7 @@ button svg {
   font-weight: bolder;
   font-family: "Overpass", sans-serif;
   letter-spacing: 0.2vmin;
-  opacity: 90%;
+  opacity: 0.9;
   margin-top: 6vmin;
   color: var(--text-color);
 }

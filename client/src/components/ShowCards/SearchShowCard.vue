@@ -125,7 +125,7 @@ export default {
 .search-card-data-title {
   width: 54vmin;
   font-size: 3vmin;
-  opacity: 90%;
+  opacity: 0.9;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -133,7 +133,7 @@ export default {
 
 .search-card-sub-data-container {
   font-size: 1.8vmin;
-  opacity: 60%;
+  opacity: 0.6;
   padding: 1vmin 0 2vmin 0;
 }
 
