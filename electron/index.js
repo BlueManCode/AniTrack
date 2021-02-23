@@ -12,7 +12,6 @@ let window_options = {
 app.on('ready', () => {
   main_window = new BrowserWindow(window_options)
   main_window.maximize()
-  main_window.hide()
   main_window.loadURL('https://anitrack.vercel.app/#/')
   
   globalShortcut.register('Shift+Enter', () => {
