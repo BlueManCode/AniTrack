@@ -17,7 +17,6 @@ if (!got_the_lock) {
     // Someone tried to run a second instance, we should focus our window.
     if (main_window) {
       main_window.show()
-      main_window.focus()
     }
   })
 }
